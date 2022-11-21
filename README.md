@@ -8,6 +8,7 @@
             Characters fragment -> Detail fragment
             Location fragment -> Details location fragment
             Episodes fragment -> Details episodes fragment
+            
     
            UI RESUME:
            The app will have 1 Splash screen, 1 Activity, 6 Fragments
