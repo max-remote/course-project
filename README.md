@@ -3,7 +3,7 @@
 #### Single Activity Architecture:
     Splash screen
     Activity as container for fragments
-    Bottom Navigation View for navigate between fragments(Characters, Episodes, Location)
+    Bottom Navigation View for navigate between fragments(Characters, Location, Episodes)
     Characters fragment -> Detail fragment
     Location fragment -> Details location fragment
     Episodes fragment -> Details episodes fragment
