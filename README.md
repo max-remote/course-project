@@ -10,5 +10,4 @@
     
     UI RESUME:
     The app will have 1 Splash screen, 1 Activity, 6 Fragments
-<img src=https://user-images.githubusercontent.com/117711604/203047886-a15fe51b-68d8-415e-9789-d38d9c1e7713.png width=500>
-
+<img src=https://user-images.githubusercontent.com/117711604/203057072-f4483acf-2fd5-44c6-9539-7cec2380c8e3.png width=800>
