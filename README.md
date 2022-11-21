@@ -13,7 +13,7 @@
     * Pull-to-Refresh function on all screens
     * Support Dagger2 for DI
    
-    
+    ---
 
 
 ### My implementation
@@ -34,9 +34,13 @@
     
 <img src=https://user-images.githubusercontent.com/117711604/203156372-8eab6d0d-6f0a-4df9-91d3-24da3b56eaff.svg width=600>
 
+---
+
 ### What I have implemented:
+---
 
 
 
 
 ### What i have not implemented:
+---
