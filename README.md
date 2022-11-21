@@ -1,6 +1,25 @@
-# Тechnical Task for the course project
+# Тechnical Task for the course project:
+
+
+### The test task is: 
+ * #### Build the app that will implement this  [API](https://rickandmortyapi.com/) and will have this functions:
+    * Splash screen
+    * Screens with lists of characters, locations and episodes.
+    * Support backward navigation on all screens, except the main screen, also need to display the back arrow button.
+    * Details screens with information about the character, location, or episodes selected in the bottom navigation or another screen
+    * Display the progress bar when data is loading
+    * Filtering by some parameters and searching by name on each list screen. If there is no data on the specified parameters need to display information about it on the screen
+    * Supporting caching and work without internet
+    * Pull-to-Refresh function on all screens
+    * Use Dagger2 for DI
+   
+    
+
+
+#### My implementation
+
 * ### UI 
-    * ##### Single Activity Architecture:
+    * #### Single Activity Architecture:
 
             Splash screen
             Activity as container for fragments
@@ -14,3 +33,12 @@
            The app will have 1 Splash screen, 1 Activity, 6 Fragments
     
 <img src=https://user-images.githubusercontent.com/117711604/203057072-f4483acf-2fd5-44c6-9539-7cec2380c8e3.png width=800>
+
+
+### What I have implemented:
+
+
+
+
+
+### What i have not implemented:
