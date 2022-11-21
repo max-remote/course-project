@@ -16,7 +16,7 @@
     
 
 
-#### My implementation
+### My implementation
 
 * ### UI 
     * #### Single Activity Architecture:
@@ -32,11 +32,9 @@
            UI RESUME:
            The app will have 1 Splash screen, 1 Activity, 6 Fragments
     
-<img src=https://user-images.githubusercontent.com/117711604/203057072-f4483acf-2fd5-44c6-9539-7cec2380c8e3.png width=800>
-
+<img src=https://user-images.githubusercontent.com/117711604/203156372-8eab6d0d-6f0a-4df9-91d3-24da3b56eaff.svg width=600>
 
 ### What I have implemented:
-
 
 
 
