@@ -11,7 +11,7 @@
     * Filtering by some parameters and searching by name on each list screen. If there is no data on the specified parameters need to display information about it on the screen
     * Supporting caching and work without internet
     * Pull-to-Refresh function on all screens
-    * Use Dagger2 for DI
+    * Support Dagger2 for DI
    
     
 
