@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">CourseProject</string>
+    <string name="characters_bottom_naming">Chracters</string>
+    <string name="location_bottom_naming">Location</string>
+    <string name="episodes_bottom_naming">Episodes</string>
 </resources>
