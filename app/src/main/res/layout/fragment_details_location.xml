@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.location.location_fragment.LocationFragment">
+    tools:context=".ui.fragments.location.LocationFragment">
 
     <ImageButton
         android:id="@+id/btn_back_description_location"

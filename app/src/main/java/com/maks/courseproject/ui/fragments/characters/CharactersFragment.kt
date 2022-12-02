@@ -1,4 +1,4 @@
-package com.maks.courseproject.ui.location.location_fragment
+package com.maks.courseproject.ui.fragments.characters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.maks.courseproject.R
-import com.maks.courseproject.databinding.FragmentLocationBinding
-import com.maks.courseproject.ui.characters.characters_fragment.CharactersViewModel
-import com.maks.courseproject.ui.location.details_location_fragment.DetailsLocationFragment
+import com.maks.courseproject.databinding.FragmentCharactersBinding
+import com.maks.courseproject.ui.fragments.characters_details.DetailsCharactersFragment
 
-class LocationFragment : Fragment() {
+class CharactersFragment : Fragment() {
 
-    private var _binding: FragmentLocationBinding? = null
+    private var _binding: FragmentCharactersBinding? = null
     private val binding
         get() = _binding!!
 
@@ -24,19 +23,19 @@ class LocationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLocationBinding.inflate(inflater, container, false)
+        _binding = FragmentCharactersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigateToLocationDetails()
+        navigateToCharacterDetails()
     }
 
-    private fun navigateToLocationDetails() {
-        binding.btnTestNavToLocalDescription.setOnClickListener {
+    private fun navigateToCharacterDetails() {
+        binding.btnTestNavToCharacterDescription.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container, DetailsLocationFragment())
+                .replace(R.id.container, DetailsCharactersFragment())
                 .addToBackStack("")
                 .commit()
         }

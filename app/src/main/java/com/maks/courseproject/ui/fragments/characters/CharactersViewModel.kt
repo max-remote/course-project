@@ -1,4 +1,4 @@
-package com.maks.courseproject.ui.characters.characters_fragment
+package com.maks.courseproject.ui.fragments.characters
 
 import androidx.lifecycle.ViewModel
 

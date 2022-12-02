@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.maks.courseproject.R
 import com.maks.courseproject.databinding.ActivityMainBinding
-import com.maks.courseproject.ui.characters.characters_fragment.CharactersFragment
-import com.maks.courseproject.ui.episodes.episodes_fragment.EpisodesFragment
-import com.maks.courseproject.ui.location.location_fragment.LocationFragment
+import com.maks.courseproject.ui.fragments.characters.CharactersFragment
+import com.maks.courseproject.ui.fragments.episodes.EpisodesFragment
+import com.maks.courseproject.ui.fragments.location.LocationFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.maks.courseproject.ui.episodes.details_episodes_fragment
+package com.maks.courseproject.ui.fragments.episodes_details
 
 import androidx.lifecycle.ViewModel
 

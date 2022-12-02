@@ -1,4 +1,4 @@
-package com.maks.courseproject.ui.characters.details_characters_fragment
+package com.maks.courseproject.ui.fragments.characters_details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.maks.courseproject.databinding.FragmentDetailsCharactersBinding
-import com.maks.courseproject.ui.characters.characters_fragment.CharactersViewModel
+import com.maks.courseproject.ui.fragments.characters.CharactersViewModel
 
 class DetailsCharactersFragment : Fragment() {
 

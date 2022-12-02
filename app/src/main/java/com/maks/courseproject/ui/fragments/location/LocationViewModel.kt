@@ -1,4 +1,4 @@
-package com.maks.courseproject.ui.location.location_fragment
+package com.maks.courseproject.ui.fragments.location
 
 import androidx.lifecycle.ViewModel
 

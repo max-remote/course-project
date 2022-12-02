@@ -1,4 +1,4 @@
-package com.maks.courseproject.ui.location.details_location_fragment
+package com.maks.courseproject.ui.fragments.location_details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.maks.courseproject.databinding.FragmentDetailsLocationBinding
-import com.maks.courseproject.ui.characters.characters_fragment.CharactersViewModel
+import com.maks.courseproject.ui.fragments.characters.CharactersViewModel
 
 class DetailsLocationFragment : Fragment() {
-
 
     private var _binding: FragmentDetailsLocationBinding? = null
     private val binding
