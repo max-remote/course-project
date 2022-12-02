@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.characters.characters_fragment.CharactersFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.location.location_fragment.LocationFragment">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:text="CHARACTERS FRAGMENT"
         android:textSize="40sp"
-        android:text="CHARACTER FRAGMENT" />
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="73dp" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btn_test_nav_to_character_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="TAP FOR NAVIGATE TO DESRIPRION"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.633" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,32 +1,49 @@
 package com.maks.courseproject.ui.episodes.episodes_fragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.maks.courseproject.R
+import com.maks.courseproject.databinding.FragmentEpisodesBinding
+import com.maks.courseproject.ui.characters.characters_fragment.CharactersViewModel
+import com.maks.courseproject.ui.episodes.details_episodes_fragment.DetailsEpisodesFragment
 
 class EpisodesFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = EpisodesFragment()
-    }
+    private var _binding: FragmentEpisodesBinding? = null
+    private val binding
+        get() = _binding!!
 
-    private lateinit var viewModel: EpisodesViewModel
+    private val viewModel: CharactersViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_episodes, container, false)
+    ): View {
+        _binding = FragmentEpisodesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(EpisodesViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navigateToEpisodesDetails()
     }
 
+    private fun navigateToEpisodesDetails() {
+        binding.btnTestNavToEpisodeDescription.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container, DetailsEpisodesFragment())
+                .addToBackStack("")
+                .commit()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

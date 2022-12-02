@@ -1,32 +1,48 @@
 package com.maks.courseproject.ui.characters.characters_fragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.maks.courseproject.R
+import com.maks.courseproject.databinding.FragmentCharactersBinding
+import com.maks.courseproject.ui.characters.details_characters_fragment.DetailsCharactersFragment
 
 class CharactersFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CharactersFragment()
-    }
+    private var _binding: FragmentCharactersBinding? = null
+    private val binding
+        get() = _binding!!
 
-    private lateinit var viewModel: CharactersViewModel
+    private val viewModel: CharactersViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_characters, container, false)
+    ): View {
+        _binding = FragmentCharactersBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CharactersViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navigateToCharacterDetails()
     }
 
+    private fun navigateToCharacterDetails() {
+        binding.btnTestNavToCharacterDescription.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container, DetailsCharactersFragment())
+                .addToBackStack("")
+                .commit()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
