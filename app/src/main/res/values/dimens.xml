@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="splash_image_width">300dp</dimen>
+    <dimen name="splash_image_height">300dp</dimen>
+    <dimen name="splash_progress_bar_width">300dp</dimen>
+</resources>

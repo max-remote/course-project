@@ -1,7 +1,9 @@
 package com.maks.courseproject.ui.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.maks.courseproject.R
@@ -13,9 +15,11 @@ import com.maks.courseproject.ui.fragments.location.LocationFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen().apply { setKeepOnScreenCondition{ viewModel.isLoading.value }}
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -24,15 +28,16 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.container, CharactersFragment())
                 .commit()
         }
-        itemMenuSelect()
+        setItemMenuSelect()
     }
 
-    private fun itemMenuSelect() {
+    private fun setItemMenuSelect() {
         binding.bottomAppBar.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_view_characters -> {
                     doBottomFragmentNavigate(CharactersFragment())
-                    supportFragmentManager.popBackStack(null,
+                    supportFragmentManager.popBackStack(
+                        null,
                         FragmentManager.POP_BACK_STACK_INCLUSIVE
                     )
                 }
@@ -49,8 +54,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun doBottomFragmentNavigate(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .setCustomAnimations(androidx.appcompat.R.anim.abc_grow_fade_in_from_bottom,
-                androidx.appcompat.R.anim.abc_slide_out_bottom)
+            .setCustomAnimations(
+                androidx.appcompat.R.anim.abc_grow_fade_in_from_bottom,
+                androidx.appcompat.R.anim.abc_slide_out_bottom
+            )
             .addToBackStack("")
             .replace(R.id.container, fragment)
             .commit()

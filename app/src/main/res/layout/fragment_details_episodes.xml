@@ -10,7 +10,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/light_gray"
         android:backgroundTintMode="add"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_back_arrow"
