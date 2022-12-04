@@ -28,13 +28,6 @@ class DetailsEpisodesFragment : Fragment() {
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
-            navigateToEpisodeBack()
-        }
-
-        private fun navigateToEpisodeBack() {
-            binding.btnBackDescriptionEpisode.setOnClickListener {
-                requireActivity().supportFragmentManager.popBackStack()
-            }
         }
 
         override fun onDestroyView() {

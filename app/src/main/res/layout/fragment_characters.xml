@@ -1,31 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.location.LocationFragment">
+    tools:context=".ui.fragments.characters.CharactersFragment">
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/characters_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="CHARACTERS FRAGMENT"
-        android:textSize="40sp"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="73dp" />
-
-    <Button
-        android:id="@+id/btn_test_nav_to_character_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="TAP FOR NAVIGATE TO DESRIPRION"
+        android:layout_margin="@dimen/margin_for_recycler"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.633" />
-
+        app:spanCount="2"
+        tools:itemCount="50"
+        tools:listitem="@layout/item_characters" />
 </androidx.constraintlayout.widget.ConstraintLayout>

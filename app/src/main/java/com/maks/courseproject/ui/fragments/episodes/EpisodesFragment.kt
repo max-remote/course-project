@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentEpisodesBinding
 import com.maks.courseproject.ui.fragments.characters.CharactersViewModel
-import com.maks.courseproject.ui.fragments.episodes_details.DetailsEpisodesFragment
 
 class EpisodesFragment : Fragment() {
 
@@ -30,16 +28,6 @@ class EpisodesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigateToEpisodesDetails()
-    }
-
-    private fun navigateToEpisodesDetails() {
-        binding.btnTestNavToEpisodeDescription.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container, DetailsEpisodesFragment())
-                .addToBackStack("")
-                .commit()
-        }
     }
 
     override fun onDestroyView() {

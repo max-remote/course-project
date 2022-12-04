@@ -5,4 +5,6 @@
     <string name="episodes_bottom_naming">Episodes</string>
 
     <string name="progress">progress</string>
+    <string name="image_of_character">Character Image</string>
+    <string name="image_of_location">Location Image</string>
 </resources>

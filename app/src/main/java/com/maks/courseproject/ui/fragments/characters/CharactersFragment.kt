@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentCharactersBinding
-import com.maks.courseproject.ui.fragments.characters_details.DetailsCharactersFragment
 
 class CharactersFragment : Fragment() {
 
@@ -29,16 +27,6 @@ class CharactersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigateToCharacterDetails()
-    }
-
-    private fun navigateToCharacterDetails() {
-        binding.btnTestNavToCharacterDescription.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container, DetailsCharactersFragment())
-                .addToBackStack("")
-                .commit()
-        }
     }
 
     override fun onDestroyView() {
