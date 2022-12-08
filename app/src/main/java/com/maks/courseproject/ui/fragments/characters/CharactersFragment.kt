@@ -36,6 +36,14 @@ class CharactersFragment : Fragment() {
 
         initRecyclerView()
         initViewModel()
+        showProgress()
+        swipeToRefresh()
+    }
+
+    private fun swipeToRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.requestCharacter()
+        }
     }
 
     private fun initViewModel() {
@@ -52,6 +60,12 @@ class CharactersFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding.charactersRecyclerView.adapter = charactersAdapter
+    }
+
+    private fun showProgress() {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.swipeRefresh.isRefreshing = it
+        }
     }
 
     override fun onDestroyView() {

@@ -37,6 +37,20 @@ class LocationFragment : Fragment() {
 
         initRecyclerView()
         initViewModel()
+        showProgress()
+        swipeToRefresh()
+    }
+
+    private fun swipeToRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.requestLocation()
+        }
+    }
+
+    private fun showProgress() {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.swipeRefresh.isRefreshing = it
+        }
     }
 
     private fun initViewModel() {

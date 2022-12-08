@@ -43,11 +43,17 @@ class CharactersAdapter :
 
 class Comparator :
     DiffUtil.ItemCallback<CharactersResultDTO>() {
-    override fun areItemsTheSame(oldItem: CharactersResultDTO, newItem: CharactersResultDTO): Boolean {
+    override fun areItemsTheSame(
+        oldItem: CharactersResultDTO,
+        newItem: CharactersResultDTO
+    ): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: CharactersResultDTO, newItem: CharactersResultDTO): Boolean {
+    override fun areContentsTheSame(
+        oldItem: CharactersResultDTO,
+        newItem: CharactersResultDTO
+    ): Boolean {
         return oldItem == newItem
     }
 }

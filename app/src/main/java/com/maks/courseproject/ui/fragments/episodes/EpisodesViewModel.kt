@@ -21,6 +21,7 @@ class EpisodesViewModel @Inject constructor(
     private val remoteRepository: RemoteRepositoryImpl
 ) : ViewModel() {
     val episodesLiveData: LiveData<EpisodesDTO> = MutableLiveData()
+    val isLoading: LiveData<Boolean> = MutableLiveData()
 
     init {
         requestEpisodes()
@@ -31,12 +32,15 @@ class EpisodesViewModel @Inject constructor(
 
     }.flow.cachedIn(viewModelScope)
 
-    private fun requestEpisodes() = viewModelScope.launch {
+    fun requestEpisodes() = viewModelScope.launch {
+        isLoading.mutable().postValue(true)
         remoteRepository.getEpisodes().let { response ->
             if (response.isSuccessful) {
                 episodesLiveData.mutable().postValue(response.body())
+                isLoading.mutable().postValue(false)
             } else {
                 Log.d("@@@", "getAllCharactersError: ${response.errorBody()}")
+                isLoading.mutable().postValue(false)
             }
         }
     }

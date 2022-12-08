@@ -21,6 +21,7 @@ class CharactersViewModel @Inject constructor(
     private val charactersRepository: RemoteRepositoryImpl
 ) : ViewModel() {
     val charactersLiveData: LiveData<CharacterDTO> = MutableLiveData()
+    val isLoading: LiveData<Boolean> = MutableLiveData()
 
     init {
       requestCharacter()
@@ -31,11 +32,14 @@ class CharactersViewModel @Inject constructor(
 
     }.flow.cachedIn(viewModelScope)
 
-    private fun requestCharacter() = viewModelScope.launch {
+     fun requestCharacter() = viewModelScope.launch {
+        isLoading.mutable().postValue(true)
         charactersRepository.getCharacters().let { response ->
             if (response.isSuccessful) {
+                isLoading.mutable().postValue(false)
                 charactersLiveData.mutable().postValue(response.body())
             } else {
+                isLoading.mutable().postValue(false)
                 Log.d("@@@", "getAllCharactersError: ${response.errorBody()}")
             }
         }

@@ -16,6 +16,8 @@ buildscript {
         glide_version = "4.14.2"
         okhttp_version = '5.0.0-alpha.3'
         paging_version = '3.2.0-alpha03'
+        room_version = '2.4.3'
+        swipe_refresh_version = '1.1.0'
     }
 }
 plugins {

@@ -54,10 +54,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun doBottomFragmentNavigate(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .setCustomAnimations(
-                androidx.appcompat.R.anim.abc_grow_fade_in_from_bottom,
-                androidx.appcompat.R.anim.abc_shrink_fade_out_from_bottom
-            )
             .addToBackStack("")
             .replace(R.id.container, fragment)
             .commit()

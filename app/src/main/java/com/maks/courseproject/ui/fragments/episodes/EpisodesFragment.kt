@@ -37,7 +37,22 @@ class EpisodesFragment : Fragment() {
 
         initRecyclerView()
         initViewModel()
+        showProgress()
+        swipeToRefresh()
     }
+
+    private fun swipeToRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.requestEpisodes()
+        }
+    }
+
+    private fun showProgress() {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.swipeRefresh.isRefreshing = it
+        }
+    }
+
 
     private fun initViewModel() {
         viewModel.episodesLiveData.observe(viewLifecycleOwner) { response ->

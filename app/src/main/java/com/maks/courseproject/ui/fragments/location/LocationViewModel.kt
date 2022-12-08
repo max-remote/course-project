@@ -21,6 +21,8 @@ class LocationViewModel @Inject constructor(
     private val remoteRepository: RemoteRepositoryImpl
 ) : ViewModel() {
     val locationsLiveData: LiveData<LocationDTO> = MutableLiveData()
+    val isLoading: LiveData<Boolean> = MutableLiveData()
+
 
     init {
         requestLocation()
@@ -31,11 +33,14 @@ class LocationViewModel @Inject constructor(
 
     }.flow.cachedIn(viewModelScope)
 
-    private fun requestLocation() = viewModelScope.launch {
+    fun requestLocation() = viewModelScope.launch {
+        isLoading.mutable().postValue(true)
         remoteRepository.getLocations().let { response ->
             if (response.isSuccessful) {
                 locationsLiveData.mutable().postValue(response.body())
+                isLoading.mutable().postValue(false)
             } else {
+                isLoading.mutable().postValue(false)
                 Log.d("@@@", "getAllCharactersError: ${response.errorBody()}")
             }
         }

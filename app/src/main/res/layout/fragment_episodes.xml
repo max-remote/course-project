@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.episodes.EpisodesFragment">
 
+    <TextView
+        android:id="@+id/text_view_name_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_padding"
+        android:text="@string/episodes_header_text"
+        android:textColor="@color/extra_green"
+        android:textSize="@dimen/header_text_view_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_name_screen">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/episodes_recycler_view"
         android:layout_width="match_parent"
@@ -13,12 +33,9 @@
         android:layout_margin="@dimen/margin_for_recycler"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:spanCount="2"
         tools:itemCount="50"
         tools:listitem="@layout/item_episodes" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
