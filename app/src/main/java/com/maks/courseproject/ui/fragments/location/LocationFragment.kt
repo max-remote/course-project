@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.maks.courseproject.databinding.FragmentLocationBinding
 import com.maks.courseproject.getAppComponent
+import kotlinx.coroutines.launch
 
 class LocationFragment : Fragment() {
 
@@ -34,10 +36,17 @@ class LocationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
+        initViewModel()
+    }
 
+    private fun initViewModel() {
         viewModel.locationsLiveData.observe(viewLifecycleOwner) { response ->
             if (response != null) {
-                locationAdapter.submitList(response.results)
+                lifecycleScope.launch {
+                    viewModel.listData.collect() {
+                        locationAdapter.submitData(it)
+                    }
+                }
             }
         }
     }

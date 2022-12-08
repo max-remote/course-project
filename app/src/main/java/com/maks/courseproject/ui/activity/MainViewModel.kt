@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-const val DELAY_FOR_SPLASH = 2500L
+const val DELAY_FOR_SPLASH = 2000L
 
 class MainViewModel : ViewModel() {
 

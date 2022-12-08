@@ -2,21 +2,22 @@ package com.maks.courseproject.ui.fragments.characters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.maks.courseproject.databinding.ItemCharactersBinding
 import com.maks.courseproject.domain.model.characters.CharactersResultDTO
 
 class CharactersAdapter :
-    ListAdapter<CharactersResultDTO, CharactersAdapter.CharactersViewHolder>(Comparator()) {
+    PagingDataAdapter<CharactersResultDTO, CharactersAdapter.CharactersViewHolder>(Comparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CharactersViewHolder(parent)
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) =
-        holder.bind(getItem(position))
+        holder.bind(getItem(position)!!)
 
     inner class CharactersViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         ItemCharactersBinding.inflate(LayoutInflater.from(parent.context), parent, false).root
@@ -27,6 +28,7 @@ class CharactersAdapter :
             with(item) {
                 Glide.with(itemView)
                     .load(image)
+                    .transition(DrawableTransitionOptions.withCrossFade(700))
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .into(itemCharacterImage)
 

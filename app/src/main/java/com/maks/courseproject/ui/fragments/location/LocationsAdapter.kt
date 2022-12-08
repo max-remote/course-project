@@ -2,19 +2,19 @@ package com.maks.courseproject.ui.fragments.location
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.maks.courseproject.databinding.ItemLocationBinding
 import com.maks.courseproject.domain.model.locations.LocationsResultDTO
 
 class LocationsAdapter :
-    ListAdapter<LocationsResultDTO, LocationsAdapter.LocationsViewHolder>(Comparator()) {
+    PagingDataAdapter<LocationsResultDTO, LocationsAdapter.LocationsViewHolder>(Comparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = LocationsViewHolder(parent)
 
     override fun onBindViewHolder(holder: LocationsViewHolder, position: Int) =
-        holder.bind(getItem(position))
+        holder.bind(getItem(position)!!)
 
     inner class LocationsViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         ItemLocationBinding.inflate(LayoutInflater.from(parent.context), parent, false).root

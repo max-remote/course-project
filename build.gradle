@@ -15,6 +15,7 @@ buildscript {
         dagger_version = "2.44"
         glide_version = "4.14.2"
         okhttp_version = '5.0.0-alpha.3'
+        paging_version = '3.2.0-alpha03'
     }
 }
 plugins {

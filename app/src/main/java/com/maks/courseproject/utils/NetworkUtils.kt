@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://rickandmortyapi.com/api/"
+const val BASE_PAGE = 1
 
 fun Retrofit.Builder.setClient() = apply {
     val okHttpClient = OkHttpClient.Builder()

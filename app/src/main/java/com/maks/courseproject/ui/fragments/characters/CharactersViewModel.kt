@@ -5,12 +5,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import com.maks.courseproject.data.network.ApiService
+import com.maks.courseproject.data.pagging.characters.CharactersPagingSource
 import com.maks.courseproject.data.repositories.RemoteRepositoryImpl
 import com.maks.courseproject.domain.model.characters.CharacterDTO
+import com.maks.courseproject.utils.BASE_PAGE
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CharactersViewModel @Inject constructor(
+    private val apiService: ApiService,
     private val charactersRepository: RemoteRepositoryImpl
 ) : ViewModel() {
     val charactersLiveData: LiveData<CharacterDTO> = MutableLiveData()
@@ -18,6 +25,11 @@ class CharactersViewModel @Inject constructor(
     init {
       requestCharacter()
     }
+
+    val listData = Pager(PagingConfig(pageSize = BASE_PAGE)) {
+        CharactersPagingSource(apiService = apiService)
+
+    }.flow.cachedIn(viewModelScope)
 
     private fun requestCharacter() = viewModelScope.launch {
         charactersRepository.getCharacters().let { response ->

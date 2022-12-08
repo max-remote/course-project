@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen().apply { setKeepOnScreenCondition{ viewModel.isLoading.value }}
+        installSplashScreen().apply { setKeepOnScreenCondition { viewModel.isLoading.value } }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(
                 androidx.appcompat.R.anim.abc_grow_fade_in_from_bottom,
-                androidx.appcompat.R.anim.abc_slide_out_bottom
+                androidx.appcompat.R.anim.abc_shrink_fade_out_from_bottom
             )
             .addToBackStack("")
             .replace(R.id.container, fragment)

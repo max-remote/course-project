@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.maks.courseproject.databinding.FragmentCharactersBinding
 import com.maks.courseproject.getAppComponent
+import kotlinx.coroutines.launch
 
 class CharactersFragment : Fragment() {
 
@@ -31,11 +33,19 @@ class CharactersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecyclerView()
 
+        initRecyclerView()
+        initViewModel()
+    }
+
+    private fun initViewModel() {
         viewModel.charactersLiveData.observe(viewLifecycleOwner) { response ->
             if (response != null) {
-                charactersAdapter.submitList(response.results)
+                lifecycleScope.launch {
+                    viewModel.listData.collect() {
+                        charactersAdapter.submitData(it)
+                    }
+                }
             }
         }
     }
