@@ -11,6 +11,10 @@ buildscript {
         fragment_version = "1.5.4"
         coroutines_version = "1.6.4"
         splash_screen = "1.0.0"
+        retrofit_version = "2.9.0"
+        dagger_version = "2.44"
+        glide_version = "4.14.2"
+        okhttp_version = '5.0.0-alpha.3'
     }
 }
 plugins {

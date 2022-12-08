@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.maks.courseproject.databinding.FragmentEpisodesBinding
-import com.maks.courseproject.ui.fragments.characters.CharactersViewModel
+import com.maks.courseproject.getAppComponent
 
 class EpisodesFragment : Fragment() {
 
@@ -15,7 +15,11 @@ class EpisodesFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val viewModel: CharactersViewModel by activityViewModels()
+    private val viewModel: EpisodesViewModel by viewModels {
+        getAppComponent().episodesViewModelFactory()
+    }
+
+    private var episodesAdapter: EpisodesAdapter = EpisodesAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +32,17 @@ class EpisodesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
+
+        viewModel.episodesLiveData.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                episodesAdapter.submitList(response.results)
+            }
+        }
+    }
+
+    private fun initRecyclerView() {
+        binding.episodesRecyclerView.adapter = episodesAdapter
     }
 
     override fun onDestroyView() {

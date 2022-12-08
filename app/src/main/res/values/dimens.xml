@@ -6,8 +6,8 @@
     <dimen name="margin_for_recycler">8dp</dimen>
     <dimen name="card_view_margin">8dp</dimen>
     <dimen name="margin_text_view_item">8dp</dimen>
-    <dimen name="item_image_view_width">250dp</dimen>
-    <dimen name="item_image_view_height">250dp</dimen>
+    <dimen name="item_image_view_width">200dp</dimen>
+    <dimen name="item_image_view_height">200dp</dimen>
     <dimen name="corner_radius_card_view">8dp</dimen>
     <dimen name="standard_text_size_item">17sp</dimen>
     <dimen name="small_text_size_item">12sp</dimen>
