@@ -14,6 +14,8 @@ import com.maks.courseproject.domain.model.characters.CharactersResultDTO
 class CharactersAdapter :
     PagingDataAdapter<CharactersResultDTO, CharactersAdapter.CharactersViewHolder>(Comparator()) {
 
+    var onItemClickListener: ((CharactersResultDTO) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CharactersViewHolder(parent)
 
     override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) =
@@ -36,6 +38,10 @@ class CharactersAdapter :
                 itemCharacterSpecies.text = species
                 itemCharacterStatus.text = status
                 itemCharacterGender.text = gender
+
+                itemView.setOnClickListener{
+                    onItemClickListener?.invoke(item)
+                }
             }
         }
     }

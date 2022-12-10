@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/item_episodes_image"
             android:layout_width="@dimen/item_image_view_width"
-            android:layout_height="@dimen/item_image_view_height"
+            android:layout_height="@dimen/item_episode_image_view_height"
             android:contentDescription="@string/image_of_character"
             android:scaleType="centerCrop"
             android:src="@drawable/image_episodes"

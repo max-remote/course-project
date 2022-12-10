@@ -13,7 +13,7 @@
         <ImageView
             android:id="@+id/item_location_image"
             android:layout_width="@dimen/item_image_view_width"
-            android:layout_height="@dimen/item_image_view_height"
+            android:layout_height="@dimen/item_location_image_view_height"
             android:contentDescription="@string/image_of_location"
             android:scaleType="centerCrop"
             android:src="@drawable/image_location"

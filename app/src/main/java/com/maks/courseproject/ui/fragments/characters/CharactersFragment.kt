@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentCharactersBinding
 import com.maks.courseproject.getAppComponent
+import com.maks.courseproject.ui.fragments.characters_details.DetailsCharactersFragment
 import kotlinx.coroutines.launch
 
 class CharactersFragment : Fragment() {
@@ -20,6 +24,7 @@ class CharactersFragment : Fragment() {
     private val viewModel: CharactersViewModel by viewModels {
         getAppComponent().charactersViewModelsFactory()
     }
+
     private var charactersAdapter: CharactersAdapter = CharactersAdapter()
 
     override fun onCreateView(
@@ -35,9 +40,45 @@ class CharactersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
-        initViewModel()
+        initData()
         showProgress()
         swipeToRefresh()
+        onButtonSearchClicked()
+        onItemClicked()
+
+                //TODO ПОИСК ПО СПИСКУ РЕАЛИЗОВАТЬ
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return true
+            }
+
+        })
+    }
+
+    private fun onItemClicked() {
+        charactersAdapter.onItemClickListener = { character ->
+            requireActivity().supportFragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(
+                    R.id.container,
+                    DetailsCharactersFragment.newInstance(character.id)
+                )
+                .commit()
+        }
+    }
+
+    private fun onButtonSearchClicked() = with(binding) {
+        btnSearch.setOnClickListener {
+            if (!searchView.isVisible) {
+                searchView.visibility = View.VISIBLE
+            } else {
+                searchView.visibility = View.GONE
+            }
+        }
     }
 
     private fun swipeToRefresh() {
@@ -46,7 +87,7 @@ class CharactersFragment : Fragment() {
         }
     }
 
-    private fun initViewModel() {
+    private fun initData() {
         viewModel.charactersLiveData.observe(viewLifecycleOwner) { response ->
             if (response != null) {
                 lifecycleScope.launch {

@@ -4,10 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentDetailsCharactersBinding
-import com.maks.courseproject.ui.fragments.characters.CharactersViewModel
+import com.maks.courseproject.getAppComponent
+import com.maks.courseproject.utils.showToast
+import kotlinx.coroutines.launch
 
 class DetailsCharactersFragment : Fragment() {
 
@@ -15,7 +22,12 @@ class DetailsCharactersFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private val viewModel: CharactersViewModel by activityViewModels()
+    private val viewModel: DetailsCharactersViewModel by viewModels {
+        getAppComponent().detailsCharacterViewModelFactory()
+    }
+
+    private var episodesAdapter: CharacterEpisodesAdapter = CharacterEpisodesAdapter()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,13 +40,101 @@ class DetailsCharactersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getCharacter()
         navigateToCharacter()
+        initData()
+        showProgress()
+        swipeToRefresh()
+        initRecyclerView()
+    }
+
+    private fun getCharacter() {
+        val id = arguments.let {
+            it?.getInt(CHARACTER_ID)
+        }
+        viewModel.requestCharacter(id ?: throw RuntimeException("id == null"))
+    }
+
+    private fun swipeToRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            getCharacter()
+        }
+    }
+
+    private fun showProgress() {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.swipeRefresh.isRefreshing = it
+        }
+    }
+
+    private fun initData() = with(binding) {
+        viewModel.charactersLiveData.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                lifecycleScope.launch {
+                    Glide.with(this@DetailsCharactersFragment)
+                        .load(response.image)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                        .into(characterImageView)
+
+                    characterName.text =
+                        resources.getString(R.string.character_name, response.name)
+                    characterStatus.text =
+                        resources.getString(R.string.character_status, response.status)
+                    characterSpecies.text =
+                        resources.getString(R.string.character_species, response.species)
+
+                    if (response.type.isEmpty()) {
+                        characterType.text =
+                            resources.getString(R.string.character_type_null)
+                    } else {
+                        characterType.text =
+                            resources.getString(R.string.character_type, response.type)
+                    }
+
+                    characterGender.text =
+                        resources.getString(R.string.character_gender, response.gender)
+                    characterOrigin.text =
+                        resources.getString(R.string.character_origin, response.origin.name)
+
+                    characterLocation.text =
+                        resources.getString(R.string.character_location, response.location.name)
+
+                    characterOrigin.setOnClickListener {
+                        if (response.origin.name == "unknown") {
+                            showToast("The characters origin is ${response.origin.name}")
+                        } else {
+                            //TODO Сделать переход на локацию
+                        }
+                    }
+
+                    characterLocation.setOnClickListener {
+                        if (response.location.name == "unknown") {
+                            showToast("The characters location is ${response.location.name}")
+                        } else {
+                            //TODO Сделать переход на локацию
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun initRecyclerView() {
+        binding.episodesRecyclerView.adapter = episodesAdapter
     }
 
     private fun navigateToCharacter() {
         binding.btnBackDescriptionCharacters.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
+    }
+
+    companion object {
+        const val CHARACTER_ID = "CHARACTER_ID"
+        fun newInstance(characterItemId: Int) =
+            DetailsCharactersFragment().apply {
+                arguments = bundleOf(CHARACTER_ID to characterItemId)
+            }
     }
 
     override fun onDestroyView() {

@@ -24,7 +24,7 @@ class CharactersViewModel @Inject constructor(
     val isLoading: LiveData<Boolean> = MutableLiveData()
 
     init {
-      requestCharacter()
+        requestCharacter()
     }
 
     val listData = Pager(PagingConfig(pageSize = BASE_PAGE)) {
@@ -32,15 +32,17 @@ class CharactersViewModel @Inject constructor(
 
     }.flow.cachedIn(viewModelScope)
 
-     fun requestCharacter() = viewModelScope.launch {
-        isLoading.mutable().postValue(true)
-        charactersRepository.getCharacters().let { response ->
-            if (response.isSuccessful) {
-                isLoading.mutable().postValue(false)
-                charactersLiveData.mutable().postValue(response.body())
-            } else {
-                isLoading.mutable().postValue(false)
-                Log.d("@@@", "getAllCharactersError: ${response.errorBody()}")
+    fun requestCharacter() {
+        viewModelScope.launch {
+            isLoading.mutable().postValue(true)
+            charactersRepository.getCharacters().let { response ->
+                if (response.isSuccessful) {
+                    isLoading.mutable().postValue(false)
+                    charactersLiveData.mutable().postValue(response.body())
+                } else {
+                    isLoading.mutable().postValue(false)
+                    Log.d("@@@", "getAllCharactersError: ${response.errorBody()}")
+                }
             }
         }
     }

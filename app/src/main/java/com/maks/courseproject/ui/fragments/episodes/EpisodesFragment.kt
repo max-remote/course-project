@@ -36,7 +36,7 @@ class EpisodesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
-        initViewModel()
+        initData()
         showProgress()
         swipeToRefresh()
     }
@@ -54,7 +54,7 @@ class EpisodesFragment : Fragment() {
     }
 
 
-    private fun initViewModel() {
+    private fun initData() {
         viewModel.episodesLiveData.observe(viewLifecycleOwner) { response ->
             if (response != null) {
                 lifecycleScope.launch {
