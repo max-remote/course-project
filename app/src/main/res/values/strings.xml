@@ -17,12 +17,26 @@
 
     <string name="character_name">Name: %1$s</string>
     <string name="character_status">Status: %1$s</string>
+    <string name="character_unknown_status">Status: ¯\\_(ツ)_/¯</string>
     <string name="character_species">Species: %1$s</string>
     <string name="character_type">Type: %1$s</string>
-    <string name="character_type_null">Type:  _(ツ)_/¯</string>
+    <string name="character_type_null">Type: ¯\\_(ツ)_/¯</string>
     <string name="character_gender">Gender: %1$s</string>
     <string name="character_origin">Origin: %1$s</string>
     <string name="character_location">Location: %1$s</string>
+
+
+    <string name="location_name">Name: %1$s</string>
+    <string name="location_type">Type: %1$s</string>
+    <string name="location_dimension_unknown">Dimension is unknown  ¯\\_(ツ)_/¯</string>
+
     <string name="character_information_header_text">Information:</string>
     <string name="character_episodes_header_text">Episodes:</string>
+    <string name="characters_header_description_text">Characters:</string>
+    <string name="episode_name">Name: %1$s</string>
+    <string name="episode_number">Episode: %1$s</string>
+    <string name="episode_air">Air Date: %1$s</string>
+    <string name="episode_information_header_text">Episode Information:</string>
+    <string name="location_information_header_text">Location Information:</string>
+    <string name="image_for_details_episode_description">image_for_details_episode_description</string>
 </resources>

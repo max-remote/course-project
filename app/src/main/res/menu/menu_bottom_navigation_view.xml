@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_view_characters"
-        android:icon="@drawable/ic_characters"
+        android:icon="@drawable/ic_characters_menu"
         android:title="@string/characters_bottom_naming" />
 
     <item
         android:id="@+id/action_view_location"
-        android:icon="@drawable/ic_location"
+        android:icon="@drawable/ic_location_menu"
         android:title="@string/location_bottom_naming" />
     <item
         android:id="@+id/action_view_episodes"
-        android:icon="@drawable/ic_episodes"
+        android:icon="@drawable/ic_episodes_menu"
         android:title="@string/episodes_bottom_naming" />
 
 </menu>

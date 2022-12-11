@@ -11,6 +11,8 @@ import com.maks.courseproject.domain.model.episodes.EpisodesResultDTO
 class EpisodesAdapter :
     PagingDataAdapter<EpisodesResultDTO, EpisodesAdapter.LocationsViewHolder>(Comparator()) {
 
+    var onItemClickListener: ((EpisodesResultDTO) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = LocationsViewHolder(parent)
 
     override fun onBindViewHolder(holder: LocationsViewHolder, position: Int) =
@@ -26,6 +28,10 @@ class EpisodesAdapter :
                 itemEpisodesName.text = name
                 itemEpisodesNumber.text = episode
                 itemEpisodesAirDate.text = air_date
+
+                itemView.setOnClickListener{
+                    onItemClickListener?.invoke(item)
+                }
             }
         }
     }

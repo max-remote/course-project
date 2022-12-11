@@ -4,34 +4,91 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentDetailsEpisodesBinding
-import com.maks.courseproject.ui.fragments.characters.CharactersViewModel
+import com.maks.courseproject.getAppComponent
+import kotlinx.coroutines.launch
 
 class DetailsEpisodesFragment : Fragment() {
 
-        private var _binding: FragmentDetailsEpisodesBinding? = null
-        private val binding
-            get() = _binding!!
+    private var _binding: FragmentDetailsEpisodesBinding? = null
+    private val binding
+        get() = _binding!!
 
-        private val viewModel: CharactersViewModel by activityViewModels()
+    private val viewModel: DetailsEpisodesViewModel by viewModels {
+        getAppComponent().detailsEpisodeViewModelFactory()
+    }
 
-        override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View {
-            _binding = FragmentDetailsEpisodesBinding.inflate(inflater, container, false)
-            return binding.root
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentDetailsEpisodesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navigateBack()
+        getEpisodes()
+        initData()
+        showProgress()
+        swipeToRefresh()
+
+    }
+
+    private fun getEpisodes() {
+        val id = arguments.let {
+            it?.getInt(EPISODE_ID)
         }
+        viewModel.requestEpisode(id ?: throw RuntimeException("id == null"))
+    }
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
-        }
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
+    private fun initData() = with(binding) {
+        viewModel.episodesLiveData.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                lifecycleScope.launch {
+                    episodeName.text = resources.getString(R.string.episode_name, response.name)
+                    episodeNumber.text = resources.getString(R.string.episode_number, response.episode)
+                    episodeAir.text = resources.getString(R.string.episode_air, response.air_date)
+                }
+            }
         }
     }
+
+    private fun swipeToRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            getEpisodes()
+        }
+    }
+
+    private fun showProgress() {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.swipeRefresh.isRefreshing = it
+        }
+    }
+
+    private fun navigateBack() {
+        binding.btnBackDescriptionHeader.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+    }
+
+    companion object {
+        const val EPISODE_ID = "EPISODE_ID"
+        fun newInstance(episodeItemId: Int) =
+            DetailsEpisodesFragment().apply {
+                arguments = bundleOf(EPISODE_ID to episodeItemId)
+            }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

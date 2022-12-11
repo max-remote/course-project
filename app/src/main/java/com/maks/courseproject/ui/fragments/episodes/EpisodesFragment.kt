@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentEpisodesBinding
 import com.maks.courseproject.getAppComponent
+import com.maks.courseproject.ui.fragments.episodes_details.DetailsEpisodesFragment
 import kotlinx.coroutines.launch
 
 class EpisodesFragment : Fragment() {
@@ -39,6 +42,30 @@ class EpisodesFragment : Fragment() {
         initData()
         showProgress()
         swipeToRefresh()
+        onItemClicked()
+        onButtonSearchClicked()
+    }
+
+    private fun onItemClicked() {
+        episodesAdapter.onItemClickListener = { location ->
+            requireActivity().supportFragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(
+                    R.id.container,
+                    DetailsEpisodesFragment.newInstance(location.id)
+                )
+                .commit()
+        }
+    }
+
+    private fun onButtonSearchClicked() = with(binding) {
+        btnSearch.setOnClickListener {
+            if (!searchView.isVisible) {
+                searchView.visibility = View.VISIBLE
+            } else {
+                searchView.visibility = View.GONE
+            }
+        }
     }
 
     private fun swipeToRefresh() {
@@ -52,7 +79,6 @@ class EpisodesFragment : Fragment() {
             binding.swipeRefresh.isRefreshing = it
         }
     }
-
 
     private fun initData() {
         viewModel.episodesLiveData.observe(viewLifecycleOwner) { response ->

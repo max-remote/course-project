@@ -41,7 +41,7 @@ class CharactersViewModel @Inject constructor(
                     charactersLiveData.mutable().postValue(response.body())
                 } else {
                     isLoading.mutable().postValue(false)
-                    Log.d("@@@", "getAllCharactersError: ${response.errorBody()}")
+                    Log.d("@@@", "Error: ${response.errorBody()}")
                 }
             }
         }

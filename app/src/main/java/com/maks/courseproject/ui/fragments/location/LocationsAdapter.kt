@@ -11,6 +11,8 @@ import com.maks.courseproject.domain.model.locations.LocationsResultDTO
 class LocationsAdapter :
     PagingDataAdapter<LocationsResultDTO, LocationsAdapter.LocationsViewHolder>(Comparator()) {
 
+    var onItemClickListener: ((LocationsResultDTO) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = LocationsViewHolder(parent)
 
     override fun onBindViewHolder(holder: LocationsViewHolder, position: Int) =
@@ -26,6 +28,10 @@ class LocationsAdapter :
                 itemLocationName.text = name
                 itemLocationDimension.text = dimension
                 itemLocationType.text = type
+
+                itemView.setOnClickListener{
+                    onItemClickListener?.invoke(item)
+                }
             }
         }
     }

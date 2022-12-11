@@ -39,7 +39,7 @@ class EpisodesViewModel @Inject constructor(
                 episodesLiveData.mutable().postValue(response.body())
                 isLoading.mutable().postValue(false)
             } else {
-                Log.d("@@@", "getAllCharactersError: ${response.errorBody()}")
+                Log.d("@@@", "Error: ${response.errorBody()}")
                 isLoading.mutable().postValue(false)
             }
         }

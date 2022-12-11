@@ -45,76 +45,81 @@
                     tools:src="@drawable/image_characters" />
             </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:id="@+id/character_information_header"
-                android:layout_width="wrap_content"
-                android:layout_marginStart="@dimen/micro_margin"
-                android:layout_height="wrap_content"
-                android:text="@string/character_information_header_text"
-                android:textColor="@color/extra_dark_green"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/character_image_container"
-                app:layout_constraintTop_toTopOf="@+id/character_image_container" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/character_info_container"
+                android:layout_width="@dimen/image_view_width_character_details"
+                android:layout_height="@dimen/image_view_height_character_details"
+                app:cardCornerRadius="@dimen/corner_radius_card_view"
+                android:layout_margin="@dimen/card_view_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/character_image_container"
+                app:layout_constraintTop_toBottomOf="@+id/btn_back_description_characters">
 
-            <TextView
-                android:id="@+id/character_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/extra_green"
-                android:layout_marginStart="@dimen/micro_margin"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/character_information_header"
-                app:layout_constraintTop_toBottomOf="@+id/character_information_header"
-                tools:text="NAME" />
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/character_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/extra_green"
-                android:layout_marginStart="@dimen/micro_margin"
-                android:textSize="@dimen/small_text_size_item"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/character_information_header"
-                app:layout_constraintTop_toBottomOf="@+id/character_name"
-                tools:text="STATUS" />
+                <TextView
+                    android:id="@+id/character_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/standard_text_size_item"
+                    android:layout_marginStart="@dimen/micro_margin"
+                    android:layout_marginTop="@dimen/micro_margin"
+                    android:layout_marginBottom="@dimen/micro_margin"
+                    android:textColor="@color/dark_green"
+                    android:textStyle="bold"
+                    tools:text="NAME" />
 
-            <TextView
-                android:id="@+id/character_species"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/micro_margin"
-                android:textColor="@color/extra_green"
-                android:textSize="@dimen/small_text_size_item"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/character_information_header"
-                app:layout_constraintTop_toBottomOf="@id/character_status"
-                tools:text="SPECIES" />
+                <TextView
+                    android:id="@+id/character_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/micro_margin"
+                    android:layout_marginBottom="@dimen/micro_margin"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/standard_text_size_item"
+                    android:textStyle="bold"
+                    tools:text="STATUS" />
+
+                <TextView
+                    android:id="@+id/character_species"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/micro_margin"
+                    android:layout_marginBottom="@dimen/micro_margin"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/standard_text_size_item"
+                    android:textStyle="bold"
+                    tools:text="SPECIES" />
 
 
-            <TextView
-                android:id="@+id/character_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/micro_margin"
-                android:textColor="@color/extra_green"
-                android:textSize="@dimen/small_text_size_item"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/character_information_header"
-                app:layout_constraintTop_toBottomOf="@id/character_species"
-                tools:text="TYPE" />
+                <TextView
+                    android:id="@+id/character_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/micro_margin"
+                    android:layout_marginBottom="@dimen/micro_margin"
+                    android:textColor="@color/dark_green"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/standard_text_size_item"
 
-            <TextView
-                android:id="@+id/character_gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/micro_margin"
-                android:textColor="@color/extra_green"
-                android:textSize="@dimen/small_text_size_item"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/character_information_header"
-                app:layout_constraintTop_toBottomOf="@id/character_type"
-                tools:text="GENDER" />
+                    tools:text="TYPE" />
+
+                <TextView
+                    android:id="@+id/character_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/micro_margin"
+                    android:layout_marginBottom="@dimen/micro_margin"
+                    android:textColor="@color/dark_green"
+
+                    android:textSize="@dimen/standard_text_size_item"
+                    android:textStyle="bold"
+                    tools:text="GENDER" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/character_origin"

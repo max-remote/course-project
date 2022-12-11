@@ -41,7 +41,7 @@ class LocationViewModel @Inject constructor(
                 isLoading.mutable().postValue(false)
             } else {
                 isLoading.mutable().postValue(false)
-                Log.d("@@@", "getAllCharactersError: ${response.errorBody()}")
+                Log.d("@@@", "Error: ${response.errorBody()}")
             }
         }
     }

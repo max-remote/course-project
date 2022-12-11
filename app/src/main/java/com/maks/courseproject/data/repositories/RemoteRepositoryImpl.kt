@@ -4,7 +4,9 @@ import com.maks.courseproject.data.network.ApiService
 import com.maks.courseproject.domain.model.characters.CharacterDTO
 import com.maks.courseproject.domain.model.characters.CharactersResultDTO
 import com.maks.courseproject.domain.model.episodes.EpisodesDTO
+import com.maks.courseproject.domain.model.episodes.EpisodesResultDTO
 import com.maks.courseproject.domain.model.locations.LocationDTO
+import com.maks.courseproject.domain.model.locations.LocationsResultDTO
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -14,6 +16,10 @@ interface RemoteRepository {
     suspend fun getEpisodes(): Response<EpisodesDTO>
 
     suspend fun getOneCharacter(id: Int): Response<CharactersResultDTO>
+
+    suspend fun getOneEpisode(id: Int): Response<EpisodesResultDTO>
+
+    suspend fun getOneLocation(id: Int): Response<LocationsResultDTO>
 }
 
 class RemoteRepositoryImpl @Inject constructor(private val apiService: ApiService) : RemoteRepository {
@@ -26,4 +32,10 @@ class RemoteRepositoryImpl @Inject constructor(private val apiService: ApiServic
 
     override suspend fun getOneCharacter(id: Int): Response<CharactersResultDTO> =
         apiService.getOneCharacter(id = id)
+
+    override suspend fun getOneLocation(id: Int): Response<LocationsResultDTO> =
+        apiService.getOneLocation(id = id)
+
+    override suspend fun getOneEpisode(id: Int): Response<EpisodesResultDTO> =
+        apiService.getOneEpisode(id = id)
 }

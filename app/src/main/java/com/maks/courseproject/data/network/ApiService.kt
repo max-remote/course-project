@@ -3,7 +3,9 @@ package com.maks.courseproject.data.network
 import com.maks.courseproject.domain.model.characters.CharacterDTO
 import com.maks.courseproject.domain.model.characters.CharactersResultDTO
 import com.maks.courseproject.domain.model.episodes.EpisodesDTO
+import com.maks.courseproject.domain.model.episodes.EpisodesResultDTO
 import com.maks.courseproject.domain.model.locations.LocationDTO
+import com.maks.courseproject.domain.model.locations.LocationsResultDTO
 import com.maks.courseproject.utils.BASE_PAGE
 import com.maks.courseproject.utils.BASE_URL
 import com.maks.courseproject.utils.addJsonConverter
@@ -34,6 +36,16 @@ interface ApiService {
     suspend fun getOneCharacter(
         @Path("id") id: Int
     ): Response<CharactersResultDTO>
+
+    @GET("episode/{id}")
+    suspend fun getOneEpisode(
+        @Path("id") id: Int
+    ): Response<EpisodesResultDTO>
+
+    @GET("location/{id}")
+    suspend fun getOneLocation(
+        @Path("id") id: Int
+    ): Response<LocationsResultDTO>
 
     companion object {
         fun create(): ApiService {
