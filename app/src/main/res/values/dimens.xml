@@ -17,13 +17,18 @@
     <dimen name="width_search_view_back">1dp</dimen>
     <dimen name="search_view_margin">3dp</dimen>
     <dimen name="small_margin">8dp</dimen>
-    <dimen name="image_view_height_character_details">200dp</dimen>
+    <dimen name="image_view_height_character_details">180dp</dimen>
     <dimen name="back_btn_margin">8dp</dimen>
     <dimen name="header_details_margin">16dp</dimen>
-    <dimen name="image_view_width_character_details">200dp</dimen>
+    <dimen name="image_view_width_character_details">180dp</dimen>
     <dimen name="item_episode_image_view_height">120dp</dimen>
     <dimen name="item_location_image_view_height">120dp</dimen>
     <dimen name="micro_margin">4dp</dimen>
     <dimen name="large_text_size">26sp</dimen>
     <dimen name="standard_margin">16dp</dimen>
+    <dimen name="button_width">50dp</dimen>
+    <dimen name="button_height">50dp</dimen>
+    <dimen name="fill_parent">0dp</dimen>
+    <dimen name="vector_max_size">200dp</dimen>
+    <dimen name="icon_size_for_menu">30dp</dimen>
 </resources>

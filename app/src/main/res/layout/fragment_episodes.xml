@@ -45,11 +45,10 @@
         app:queryHint="Search episode here"
         tools:visibility="visible" />
 
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/fill_parent"
+        android:layout_height="@dimen/fill_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -7,8 +7,8 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/fill_parent"
+        android:layout_height="@dimen/fill_parent"
         app:layout_constraintBottom_toTopOf="@+id/bottom_app_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,11 +19,13 @@
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:itemIconSize="@dimen/icon_size_for_menu"
+        app:itemTextAppearanceActive="@color/black"
+        app:itemTextColor="@color/purple_200"
         android:background="@color/light_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_bottom_navigation_view" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

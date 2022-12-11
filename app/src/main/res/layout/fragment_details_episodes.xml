@@ -17,8 +17,8 @@
 
             <ImageButton
                 android:id="@+id/btn_back_description_header"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
                 android:layout_margin="@dimen/back_btn_margin"
                 android:backgroundTintMode="add"
                 android:contentDescription="@string/button_back_description"
@@ -26,7 +26,6 @@
                 android:src="@drawable/ic_back_arrow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <TextView
                 android:id="@+id/episode_information_header"
@@ -98,8 +97,6 @@
                         tools:text="AIR DATE" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
-
-
             </com.google.android.material.card.MaterialCardView>
 
             <TextView

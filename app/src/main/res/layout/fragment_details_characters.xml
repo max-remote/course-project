@@ -17,8 +17,8 @@
 
             <ImageButton
                 android:id="@+id/btn_back_description_characters"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
                 android:layout_margin="@dimen/back_btn_margin"
                 android:backgroundTintMode="add"
                 android:contentDescription="@string/button_back_description"
@@ -29,12 +29,14 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/character_image_container"
-                android:layout_width="@dimen/image_view_width_character_details"
+                android:layout_width="@dimen/fill_parent"
                 android:layout_height="@dimen/image_view_height_character_details"
-                android:layout_margin="@dimen/card_view_margin"
                 app:cardCornerRadius="@dimen/corner_radius_card_view"
+                app:layout_constraintEnd_toStartOf="@+id/character_info_container"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_back_description_characters">
+                android:layout_margin="@dimen/small_margin"
+                app:layout_constraintTop_toBottomOf="@+id/btn_back_description_characters"
+                app:layout_constraintHorizontal_weight="5">
 
                 <ImageView
                     android:id="@+id/character_image_view"
@@ -47,15 +49,17 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/character_info_container"
-                android:layout_width="@dimen/image_view_width_character_details"
+                android:layout_width="@dimen/fill_parent"
                 android:layout_height="@dimen/image_view_height_character_details"
                 app:cardCornerRadius="@dimen/corner_radius_card_view"
-                android:layout_margin="@dimen/card_view_margin"
+                app:layout_constraintWidth_percent="0.5"
+                android:layout_margin="@dimen/small_margin"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/character_image_container"
-                app:layout_constraintTop_toBottomOf="@+id/btn_back_description_characters">
+                app:layout_constraintTop_toBottomOf="@+id/btn_back_description_characters"
+                app:layout_constraintHorizontal_weight="5">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+
+            <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
