@@ -2,6 +2,7 @@ package com.maks.courseproject.ui.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
@@ -57,5 +58,23 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack("")
             .replace(R.id.container, fragment)
             .commit()
+    }
+
+    override fun onBackPressed() {
+        val currentFragment =
+            this@MainActivity.supportFragmentManager.findFragmentById(R.id.container)
+        if (currentFragment is CharactersFragment) {
+            AlertDialog.Builder(this@MainActivity)
+                .setTitle("Leaving app")
+                .setMessage("The Pickle Rick said that you want to leaving app. Are you sure?")
+                .setIcon(R.drawable.ic_characters_menu)
+                .setPositiveButton(android.R.string.ok) { dialog, whichButton ->
+                    super.onBackPressed()
+                }
+                .setNegativeButton(android.R.string.cancel) { dialog, whichButton -> }
+                .show()
+        } else {
+            super.onBackPressed()
+        }
     }
 }
