@@ -8,12 +8,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.appbar.AppBarLayout
 import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentDetailsLocationBinding
 import com.maks.courseproject.getAppComponent
 import kotlinx.coroutines.launch
 
-class DetailsLocationFragment : Fragment() {
+class DetailsLocationFragment : Fragment(), AppBarLayout.OnOffsetChangedListener {
 
     private var _binding: FragmentDetailsLocationBinding? = null
     private val binding
@@ -22,6 +23,8 @@ class DetailsLocationFragment : Fragment() {
     private val viewModel: DetailsLocationViewModel by viewModels {
         getAppComponent().detailsLocationViewModelFactory()
     }
+
+    private var residentsAdapter: DetailLocCharactersAdapter = DetailLocCharactersAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,6 +40,7 @@ class DetailsLocationFragment : Fragment() {
         initData()
         showProgress()
         swipeToRefresh()
+        initRecyclerView()
     }
 
     private fun getLocation() {
@@ -61,9 +65,21 @@ class DetailsLocationFragment : Fragment() {
                     } else {
                         locationDimension.text = response.dimension
                     }
+                    viewModel.requestResidents(response.residents)
                 }
             }
         }
+        viewModel.residentsLiveData.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                lifecycleScope.launch {
+                    residentsAdapter.submitList(response)
+                }
+            }
+        }
+    }
+
+    private fun initRecyclerView() {
+        binding.charactersRecyclerView.adapter = residentsAdapter
     }
 
     private fun swipeToRefresh() {
@@ -90,6 +106,21 @@ class DetailsLocationFragment : Fragment() {
             DetailsLocationFragment().apply {
                 arguments = bundleOf(LOCATION_ID to locationItemId)
             }
+    }
+
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        binding.swipeRefresh.isEnabled = verticalOffset == 0
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.appBar.addOnOffsetChangedListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.appBar.removeOnOffsetChangedListener(this)
     }
 
     override fun onDestroyView() {

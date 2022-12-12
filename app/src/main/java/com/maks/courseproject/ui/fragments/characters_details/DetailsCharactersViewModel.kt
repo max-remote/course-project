@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.maks.courseproject.data.repositories.RemoteRepositoryImpl
 import com.maks.courseproject.domain.model.characters.CharactersResultDTO
-import com.maks.courseproject.domain.model.episodes.EpisodesDTO
+import com.maks.courseproject.domain.model.episodes.EpisodesResultDTO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,7 +18,7 @@ class DetailsCharactersViewModel @Inject constructor(
     val isLoading: LiveData<Boolean> = MutableLiveData()
     val charactersLiveData: LiveData<CharactersResultDTO> = MutableLiveData()
 
-    val episodesLiveData: LiveData<EpisodesDTO> = MutableLiveData()
+    val episodesLiveData: LiveData<List<EpisodesResultDTO>> = MutableLiveData()
 
     fun requestCharacter(characterId: Int) {
         viewModelScope.launch {
@@ -30,6 +30,21 @@ class DetailsCharactersViewModel @Inject constructor(
                 } else {
                     isLoading.mutable().postValue(false)
                     Log.d("@@@", "Error: ${response.errorBody()}")
+                }
+            }
+        }
+    }
+
+     fun requestEpisodes(urls: List<String>) {
+        viewModelScope.launch {
+            isLoading.mutable().postValue(true)
+            charactersRepository.getCharacterEpisodes(urls).let { response ->
+                if (response.isEmpty()) {
+                    isLoading.mutable().postValue(false)
+                    Log.d("@@@", "Error")
+                } else {
+                    isLoading.mutable().postValue(false)
+                    episodesLiveData.mutable().postValue(response)
                 }
             }
         }

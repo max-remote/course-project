@@ -10,13 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.appbar.AppBarLayout
 import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentDetailsCharactersBinding
 import com.maks.courseproject.getAppComponent
 import com.maks.courseproject.utils.showToast
 import kotlinx.coroutines.launch
 
-class DetailsCharactersFragment : Fragment() {
+class DetailsCharactersFragment : Fragment(), AppBarLayout.OnOffsetChangedListener {
 
     private var _binding: FragmentDetailsCharactersBinding? = null
     private val binding
@@ -114,6 +115,14 @@ class DetailsCharactersFragment : Fragment() {
                             //TODO Сделать переход на локацию
                         }
                     }
+                    viewModel.requestEpisodes(response.episode)
+                }
+            }
+        }
+        viewModel.episodesLiveData.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                lifecycleScope.launch {
+                    episodesAdapter.submitList(response)
                 }
             }
         }
@@ -135,6 +144,20 @@ class DetailsCharactersFragment : Fragment() {
             DetailsCharactersFragment().apply {
                 arguments = bundleOf(CHARACTER_ID to characterItemId)
             }
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        binding.swipeRefresh.isEnabled = verticalOffset == 0
+    }
+
+   override fun onResume() {
+        super.onResume()
+        binding.appBar.addOnOffsetChangedListener(this)
+    }
+
+   override fun onPause() {
+        super.onPause()
+        binding.appBar.removeOnOffsetChangedListener(this)
     }
 
     override fun onDestroyView() {
