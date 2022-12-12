@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.maks.courseproject.data.repositories.RemoteRepositoryImpl
+import com.maks.courseproject.domain.model.characters.CharactersResultDTO
 import com.maks.courseproject.domain.model.episodes.EpisodesResultDTO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,6 +17,8 @@ class DetailsEpisodesViewModel @Inject constructor(
 
     val isLoading: LiveData<Boolean> = MutableLiveData()
     val episodesLiveData: LiveData<EpisodesResultDTO> = MutableLiveData()
+    val charactersLiveData: LiveData<List<CharactersResultDTO>> = MutableLiveData()
+
 
     fun requestEpisode(characterId: Int) {
         viewModelScope.launch {
@@ -31,6 +34,22 @@ class DetailsEpisodesViewModel @Inject constructor(
             }
         }
     }
+
+    fun requestResidents(urls: List<String>) {
+        viewModelScope.launch {
+            isLoading.mutable().postValue(true)
+            charactersRepository.getLocationResidents(urls).let { response ->
+                if (response.isEmpty()) {
+                    isLoading.mutable().postValue(false)
+                    Log.d("@@@", "Error")
+                } else {
+                    isLoading.mutable().postValue(false)
+                    charactersLiveData.mutable().postValue(response)
+                }
+            }
+        }
+    }
+
 
     private fun <T> LiveData<T>.mutable(): MutableLiveData<T> {
         return this as? MutableLiveData<T>

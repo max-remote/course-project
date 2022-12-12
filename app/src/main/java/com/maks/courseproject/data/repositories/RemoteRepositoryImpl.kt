@@ -16,13 +16,16 @@ interface RemoteRepository {
     suspend fun getEpisodes(): Response<EpisodesDTO>
 
     suspend fun getOneCharacter(id: Int): Response<CharactersResultDTO>
-
     suspend fun getOneEpisode(id: Int): Response<EpisodesResultDTO>
-
     suspend fun getOneLocation(id: Int): Response<LocationsResultDTO>
+
+    suspend fun getCharacterEpisodes(urls: List<String>): List<EpisodesResultDTO>
+    suspend fun getLocationResidents(urls: List<String>): List<CharactersResultDTO>
+    suspend fun getEpisodeCharacters(urls: List<String>): List<CharactersResultDTO>
 }
 
-class RemoteRepositoryImpl @Inject constructor(private val apiService: ApiService) : RemoteRepository {
+class RemoteRepositoryImpl @Inject constructor(private val apiService: ApiService) :
+    RemoteRepository {
 
     override suspend fun getCharacters(): Response<CharacterDTO> = apiService.getCharacters()
 
@@ -35,6 +38,21 @@ class RemoteRepositoryImpl @Inject constructor(private val apiService: ApiServic
 
     override suspend fun getOneLocation(id: Int): Response<LocationsResultDTO> =
         apiService.getOneLocation(id = id)
+
+    override suspend fun getCharacterEpisodes(urls: List<String>) =
+        urls.map { url ->
+            apiService.getCharacterEpisodes(url)
+        }
+
+    override suspend fun getLocationResidents(urls: List<String>) =
+        urls.map { url ->
+            apiService.getLocationResidents(url)
+        }
+
+    override suspend fun getEpisodeCharacters(urls: List<String>) =
+        urls.map { url ->
+            apiService.getEpisodeCharacters(url)
+        }
 
     override suspend fun getOneEpisode(id: Int): Response<EpisodesResultDTO> =
         apiService.getOneEpisode(id = id)

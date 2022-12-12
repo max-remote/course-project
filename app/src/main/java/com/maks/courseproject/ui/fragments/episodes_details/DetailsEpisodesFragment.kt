@@ -8,12 +8,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.appbar.AppBarLayout
 import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentDetailsEpisodesBinding
 import com.maks.courseproject.getAppComponent
 import kotlinx.coroutines.launch
 
-class DetailsEpisodesFragment : Fragment() {
+class DetailsEpisodesFragment : Fragment(), AppBarLayout.OnOffsetChangedListener {
 
     private var _binding: FragmentDetailsEpisodesBinding? = null
     private val binding
@@ -22,6 +23,8 @@ class DetailsEpisodesFragment : Fragment() {
     private val viewModel: DetailsEpisodesViewModel by viewModels {
         getAppComponent().detailsEpisodeViewModelFactory()
     }
+
+    private var charactersAdapter: DetailEpisodeCharactersAdapter = DetailEpisodeCharactersAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +42,7 @@ class DetailsEpisodesFragment : Fragment() {
         initData()
         showProgress()
         swipeToRefresh()
-
+        initRecyclerView()
     }
 
     private fun getEpisodes() {
@@ -58,7 +61,19 @@ class DetailsEpisodesFragment : Fragment() {
                     episodeAir.text = resources.getString(R.string.episode_air, response.air_date)
                 }
             }
+            viewModel.requestResidents(response.characters)
         }
+        viewModel.charactersLiveData.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                lifecycleScope.launch {
+                    charactersAdapter.submitList(response)
+                }
+            }
+        }
+    }
+
+    private fun initRecyclerView() {
+        binding.charactersRecyclerView.adapter = charactersAdapter
     }
 
     private fun swipeToRefresh() {
@@ -85,6 +100,20 @@ class DetailsEpisodesFragment : Fragment() {
             DetailsEpisodesFragment().apply {
                 arguments = bundleOf(EPISODE_ID to episodeItemId)
             }
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        binding.swipeRefresh.isEnabled = verticalOffset == 0
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.appBar.addOnOffsetChangedListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.appBar.removeOnOffsetChangedListener(this)
     }
 
     override fun onDestroyView() {

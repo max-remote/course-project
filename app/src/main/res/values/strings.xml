@@ -25,7 +25,6 @@
     <string name="character_origin">Origin: %1$s</string>
     <string name="character_location">Location: %1$s</string>
 
-
     <string name="location_name">Name: %1$s</string>
     <string name="location_type">Type: %1$s</string>
     <string name="location_dimension_unknown">Dimension is unknown  ¯\\_(ツ)_/¯</string>
@@ -33,6 +32,8 @@
     <string name="character_information_header_text">Information:</string>
     <string name="character_episodes_header_text">Episodes:</string>
     <string name="characters_header_description_text">Characters:</string>
+    <string name="residents_header_description_text">Residents:</string>
+
     <string name="episode_name">Name: %1$s</string>
     <string name="episode_number">Episode: %1$s</string>
     <string name="episode_air">Air Date: %1$s</string>
