@@ -13,7 +13,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.appbar.AppBarLayout
 import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentDetailsCharactersBinding
+import com.maks.courseproject.domain.model.characters.CharactersResultDTO
 import com.maks.courseproject.getAppComponent
+import com.maks.courseproject.ui.fragments.location_details.DetailsLocationFragment
 import com.maks.courseproject.utils.showToast
 import kotlinx.coroutines.launch
 
@@ -29,11 +31,8 @@ class DetailsCharactersFragment : Fragment(), AppBarLayout.OnOffsetChangedListen
 
     private var episodesAdapter: CharacterEpisodesAdapter = CharacterEpisodesAdapter()
 
-
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailsCharactersBinding.inflate(inflater, container, false)
         return binding.root
@@ -72,21 +71,17 @@ class DetailsCharactersFragment : Fragment(), AppBarLayout.OnOffsetChangedListen
         viewModel.charactersLiveData.observe(viewLifecycleOwner) { response ->
             if (response != null) {
                 lifecycleScope.launch {
-                    Glide.with(this@DetailsCharactersFragment)
-                        .load(response.image)
-                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                        .into(characterImageView)
+                    Glide.with(this@DetailsCharactersFragment).load(response.image)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(characterImageView)
 
-                    characterName.text =
-                        resources.getString(R.string.character_name, response.name)
+                    characterName.text = resources.getString(R.string.character_name, response.name)
                     characterStatus.text =
                         resources.getString(R.string.character_status, response.status)
                     characterSpecies.text =
                         resources.getString(R.string.character_species, response.species)
 
                     if (response.type.isEmpty()) {
-                        characterType.text =
-                            resources.getString(R.string.character_type_null)
+                        characterType.text = resources.getString(R.string.character_type_null)
                     } else {
                         characterType.text =
                             resources.getString(R.string.character_type, response.type)
@@ -99,26 +94,18 @@ class DetailsCharactersFragment : Fragment(), AppBarLayout.OnOffsetChangedListen
 
                     characterLocation.text =
                         resources.getString(R.string.character_location, response.location.name)
-
-                    characterOrigin.setOnClickListener {
-                        if (response.origin.name == "unknown") {
-                            showToast("The characters origin is ${response.origin.name}")
-                        } else {
-                            //TODO Сделать переход на локацию
-                        }
-                    }
-
-                    characterLocation.setOnClickListener {
-                        if (response.location.name == "unknown") {
-                            showToast("The characters location is ${response.location.name}")
-                        } else {
-                            //TODO Сделать переход на локацию
-                        }
-                    }
-                    viewModel.requestEpisodes(response.episode)
                 }
+
+                characterOrigin.setOnClickListener {
+                    onCharacterOriginClicked(response)
+                }
+                characterLocation.setOnClickListener {
+                    onCharacterLocationClicked(response)
+                }
+                viewModel.requestEpisodes(response.episode)
             }
         }
+
         viewModel.episodesLiveData.observe(viewLifecycleOwner) { response ->
             if (response != null) {
                 lifecycleScope.launch {
@@ -126,6 +113,33 @@ class DetailsCharactersFragment : Fragment(), AppBarLayout.OnOffsetChangedListen
                 }
             }
         }
+    }
+
+    private fun onCharacterLocationClicked(response: CharactersResultDTO) {
+        val locationCharacterUrl: String = response.location.url
+        if (response.location.name == "unknown") {
+            showToast("The characters location is ${response.location.name}")
+        } else {
+            doFragmentNavigation(locationCharacterUrl)
+        }
+    }
+
+    private fun onCharacterOriginClicked(response: CharactersResultDTO) {
+        val originCharacterUrl: String = response.origin.url
+        if (response.origin.name == "unknown") {
+            showToast("The characters origin is ${response.origin.name}")
+        } else {
+            doFragmentNavigation(originCharacterUrl)
+        }
+    }
+
+    private fun doFragmentNavigation(infoUrl: String) {
+        requireActivity().supportFragmentManager.beginTransaction().addToBackStack(null)
+            .replace(
+                R.id.container, DetailsLocationFragment.newInstance(
+                    infoUrl.substringAfterLast('/').toInt()
+                )
+            ).commit()
     }
 
     private fun initRecyclerView() {
@@ -140,22 +154,21 @@ class DetailsCharactersFragment : Fragment(), AppBarLayout.OnOffsetChangedListen
 
     companion object {
         const val CHARACTER_ID = "CHARACTER_ID"
-        fun newInstance(characterItemId: Int) =
-            DetailsCharactersFragment().apply {
-                arguments = bundleOf(CHARACTER_ID to characterItemId)
-            }
+        fun newInstance(characterItemId: Int) = DetailsCharactersFragment().apply {
+            arguments = bundleOf(CHARACTER_ID to characterItemId)
+        }
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
         binding.swipeRefresh.isEnabled = verticalOffset == 0
     }
 
-   override fun onResume() {
+    override fun onResume() {
         super.onResume()
         binding.appBar.addOnOffsetChangedListener(this)
     }
 
-   override fun onPause() {
+    override fun onPause() {
         super.onPause()
         binding.appBar.removeOnOffsetChangedListener(this)
     }
