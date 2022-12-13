@@ -11,7 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.appbar.AppBarLayout
 import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentDetailsEpisodesBinding
+import com.maks.courseproject.domain.model.characters.CharactersResultDTO
 import com.maks.courseproject.getAppComponent
+import com.maks.courseproject.ui.fragments.characters_details.DetailsCharactersFragment
 import kotlinx.coroutines.launch
 
 class DetailsEpisodesFragment : Fragment(), AppBarLayout.OnOffsetChangedListener {
@@ -74,6 +76,16 @@ class DetailsEpisodesFragment : Fragment(), AppBarLayout.OnOffsetChangedListener
 
     private fun initRecyclerView() {
         binding.charactersRecyclerView.adapter = charactersAdapter
+        charactersAdapter.onItemClickListener = { navigateBy ->
+            doNavigateToCharacters(navigateBy)
+        }
+    }
+
+    private fun doNavigateToCharacters(navigateBy: CharactersResultDTO) {
+        requireActivity().supportFragmentManager.beginTransaction().addToBackStack(null)
+            .replace(
+                R.id.container, DetailsCharactersFragment.newInstance(navigateBy.id)
+            ).commit()
     }
 
     private fun swipeToRefresh() {
