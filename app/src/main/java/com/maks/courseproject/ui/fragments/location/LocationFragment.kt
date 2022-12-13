@@ -74,9 +74,10 @@ class LocationFragment : Fragment() {
         }
     }
 
-    private fun showProgress() {
+    private fun showProgress() = with(binding) {
         viewModel.isLoading.observe(viewLifecycleOwner) {
-            binding.swipeRefresh.isRefreshing = it
+            swipeRefresh.isRefreshing = it
+            swipeRefresh.setColorSchemeResources(R.color.progress_color)
         }
     }
 
