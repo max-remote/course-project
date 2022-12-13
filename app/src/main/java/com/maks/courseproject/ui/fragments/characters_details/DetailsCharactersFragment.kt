@@ -14,7 +14,9 @@ import com.google.android.material.appbar.AppBarLayout
 import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentDetailsCharactersBinding
 import com.maks.courseproject.domain.model.characters.CharactersResultDTO
+import com.maks.courseproject.domain.model.episodes.EpisodesResultDTO
 import com.maks.courseproject.getAppComponent
+import com.maks.courseproject.ui.fragments.episodes_details.DetailsEpisodesFragment
 import com.maks.courseproject.ui.fragments.location_details.DetailsLocationFragment
 import com.maks.courseproject.utils.showToast
 import kotlinx.coroutines.launch
@@ -41,7 +43,7 @@ class DetailsCharactersFragment : Fragment(), AppBarLayout.OnOffsetChangedListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getCharacter()
-        navigateToCharacter()
+        navigateToBack()
         initData()
         showProgress()
         swipeToRefresh()
@@ -144,9 +146,19 @@ class DetailsCharactersFragment : Fragment(), AppBarLayout.OnOffsetChangedListen
 
     private fun initRecyclerView() {
         binding.episodesRecyclerView.adapter = episodesAdapter
+        episodesAdapter.onItemClickListener = { navigateBy ->
+            doNavigateToEpisode(navigateBy)
+        }
     }
 
-    private fun navigateToCharacter() {
+    private fun doNavigateToEpisode(navigateBy: EpisodesResultDTO) {
+        requireActivity().supportFragmentManager.beginTransaction().addToBackStack(null)
+            .replace(
+                R.id.container, DetailsEpisodesFragment.newInstance(navigateBy.id)
+            ).commit()
+    }
+
+    private fun navigateToBack() {
         binding.btnBackDescriptionCharacters.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
