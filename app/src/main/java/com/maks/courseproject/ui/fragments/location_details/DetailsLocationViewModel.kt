@@ -17,7 +17,6 @@ class DetailsLocationViewModel @Inject constructor(
 
     val isLoading: LiveData<Boolean> = MutableLiveData()
     val locationLiveData: LiveData<LocationsResultDTO> = MutableLiveData()
-
     val residentsLiveData: LiveData<List<CharactersResultDTO>> = MutableLiveData()
 
     fun requestLocation(characterId: Int) {
@@ -38,13 +37,15 @@ class DetailsLocationViewModel @Inject constructor(
     fun requestResidents(urls: List<String>) {
         viewModelScope.launch {
             isLoading.mutable().postValue(true)
-            charactersRepository.getLocationResidents(urls).let { response ->
-                if (response.isEmpty()) {
+
+            val preparedIds: String = urls.joinToString(",") { it.substringAfterLast('/') }
+            charactersRepository.getListOfCharacters(preparedIds).let { response ->
+                if (!response.isSuccessful) {
                     isLoading.mutable().postValue(false)
                     Log.d("@@@", "Error")
                 } else {
                     isLoading.mutable().postValue(false)
-                    residentsLiveData.mutable().postValue(response)
+                    residentsLiveData.mutable().postValue(response.body())
                 }
             }
         }

@@ -15,7 +15,6 @@ import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.Url
 
 interface ApiService {
     @GET("character/")
@@ -27,6 +26,11 @@ interface ApiService {
     suspend fun getOneCharacter(
         @Path("id") id: Int
     ): Response<CharactersResultDTO>
+
+    @GET("character/[{urlsId}]")
+    suspend fun getListOfCharactersForDetails(
+        @Path("urlsId") urlsId: String
+    ): Response<List<CharactersResultDTO>>
 
     @GET("location/")
     suspend fun getLocations(
@@ -48,20 +52,10 @@ interface ApiService {
         @Path("id") id: Int
     ): Response<EpisodesResultDTO>
 
-    @GET
+    @GET("episode/[{urlsId}]")
     suspend fun getCharacterEpisodes(
-        @Url url: String
-    ): EpisodesResultDTO
-
-    @GET
-    suspend fun getLocationResidents(
-        @Url url: String
-    ): CharactersResultDTO
-
-    @GET
-    suspend fun getEpisodeCharacters(
-        @Url url: String
-    ): CharactersResultDTO
+        @Path("urlsId") urlsId: String
+    ): Response <List<EpisodesResultDTO>>
 
     companion object {
         fun create(): ApiService {
