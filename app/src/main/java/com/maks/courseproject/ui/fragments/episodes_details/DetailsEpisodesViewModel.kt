@@ -38,13 +38,15 @@ class DetailsEpisodesViewModel @Inject constructor(
     fun requestResidents(urls: List<String>) {
         viewModelScope.launch {
             isLoading.mutable().postValue(true)
-            charactersRepository.getLocationResidents(urls).let { response ->
-                if (response.isEmpty()) {
+
+            val preparedIds: String = urls.joinToString(",") { it.substringAfterLast('/') }
+            charactersRepository.getListOfCharacters(preparedIds).let { response ->
+                if (!response.isSuccessful) {
                     isLoading.mutable().postValue(false)
                     Log.d("@@@", "Error")
                 } else {
                     isLoading.mutable().postValue(false)
-                    charactersLiveData.mutable().postValue(response)
+                    charactersLiveData.mutable().postValue(response.body())
                 }
             }
         }

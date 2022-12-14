@@ -35,16 +35,18 @@ class DetailsCharactersViewModel @Inject constructor(
         }
     }
 
-     fun requestEpisodes(urls: List<String>) {
+    fun requestEpisodes(urls: List<String>) {
         viewModelScope.launch {
             isLoading.mutable().postValue(true)
-            charactersRepository.getCharacterEpisodes(urls).let { response ->
-                if (response.isEmpty()) {
+
+            val preparedIds: String = urls.joinToString(",") { it.substringAfterLast('/') }
+            charactersRepository.getCharacterEpisodes(preparedIds).let { response ->
+                if (!response.isSuccessful) {
                     isLoading.mutable().postValue(false)
                     Log.d("@@@", "Error")
                 } else {
                     isLoading.mutable().postValue(false)
-                    episodesLiveData.mutable().postValue(response)
+                    episodesLiveData.mutable().postValue(response.body())
                 }
             }
         }
