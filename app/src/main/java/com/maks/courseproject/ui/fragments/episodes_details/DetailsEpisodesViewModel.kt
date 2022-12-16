@@ -9,10 +9,11 @@ import com.maks.courseproject.data.repositories.RemoteRepositoryImpl
 import com.maks.courseproject.domain.model.characters.CharactersResultDTO
 import com.maks.courseproject.domain.model.episodes.EpisodesResultDTO
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class DetailsEpisodesViewModel @Inject constructor(
-    private val charactersRepository: RemoteRepositoryImpl
+    private val charactersRepository: RemoteRepositoryImpl,
 ) : ViewModel() {
 
     val isLoading: LiveData<Boolean> = MutableLiveData()
@@ -22,18 +23,24 @@ class DetailsEpisodesViewModel @Inject constructor(
 
     fun requestEpisode(characterId: Int) {
         viewModelScope.launch {
-            isLoading.mutable().postValue(true)
-            charactersRepository.getOneEpisode(characterId).let { response ->
-                if (response.isSuccessful) {
-                    isLoading.mutable().postValue(false)
-                    episodesLiveData.mutable().postValue(response.body())
-                } else {
-                    isLoading.mutable().postValue(false)
-                    Log.d("@@@", "Error: ${response.errorBody()}")
+            try {
+                isLoading.mutable().postValue(true)
+                charactersRepository.getOneEpisode(characterId).let { response ->
+
+                    if (response.isSuccessful) {
+                        isLoading.mutable().postValue(false)
+                        episodesLiveData.mutable().postValue(response.body())
+                    } else {
+                        isLoading.mutable().postValue(false)
+                        Log.d("@@@", "Error: ${response.errorBody()}")
+                    }
                 }
+            } catch (e: HttpException) {
+                Log.e("@@@", "${e.code()}")
             }
         }
     }
+
 
     fun requestResidents(urls: List<String>) {
         viewModelScope.launch {

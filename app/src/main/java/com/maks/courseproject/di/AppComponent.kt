@@ -10,7 +10,8 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [NetworkModule::class, RepositoriesModule::class])
+@Component(modules = [NetworkModule::class, RemoteRepositoriesModule::class,DatabaseModule::class])
+
 interface AppComponent {
     fun charactersViewModelsFactory(): CharactersViewModelFactory
 
