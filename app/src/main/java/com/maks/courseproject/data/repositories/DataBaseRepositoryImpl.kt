@@ -1,9 +1,10 @@
 package com.maks.courseproject.data.repositories
 
-import com.maks.courseproject.data.db.dao.ApplicationDao
+import com.maks.courseproject.data.db.AppDataBase
 import com.maks.courseproject.data.db.entity.CharacterEntity
 import com.maks.courseproject.data.db.entity.EpisodeEntity
 import com.maks.courseproject.data.db.entity.LocationEntity
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface DataBaseRepository{
@@ -18,32 +19,38 @@ interface DataBaseRepository{
     suspend fun addLocation(locationEntity: LocationEntity)
 
     suspend fun getLocation(locationId: Int): LocationEntity?
+
+    suspend fun getAlLCharacters() : Flow<List<CharacterEntity>>
 }
 
 class DataBaseRepositoryImpl @Inject constructor(
-private val applicationDao: ApplicationDao
+private val appDB: AppDataBase
 ) : DataBaseRepository {
     override suspend fun addCharacter(characterEntity: CharacterEntity) {
-        applicationDao.insertCharacter(characterEntity)
+        appDB.applicationDao().insertCharacter(characterEntity)
     }
 
     override suspend fun getCharacter(characterId: Int): CharacterEntity {
-      return  applicationDao.getCharacterId(characterId)
+      return  appDB.applicationDao().getCharacterId(characterId)
     }
 
     override suspend fun addEpisode(episodeEntity: EpisodeEntity) {
-        applicationDao.insertEpisode(episodeEntity)
+        appDB.applicationDao().insertEpisode(episodeEntity)
     }
 
     override suspend fun getEpisode(episodeId: Int): EpisodeEntity {
-        return  applicationDao.getEpisodeId(episodeId)
+        return  appDB.applicationDao().getEpisodeId(episodeId)
     }
 
     override suspend fun addLocation(locationEntity: LocationEntity) {
-        applicationDao.getAllLocations()
+        appDB.applicationDao().getAllLocations()
     }
 
     override suspend fun getLocation(locationId: Int): LocationEntity {
-        return  applicationDao.getLocationId(locationId)
+        return  appDB.applicationDao().getLocationId(locationId)
+    }
+
+    override suspend fun getAlLCharacters(): Flow<List<CharacterEntity>> {
+        return appDB.applicationDao().getAllCharacters()
     }
 }

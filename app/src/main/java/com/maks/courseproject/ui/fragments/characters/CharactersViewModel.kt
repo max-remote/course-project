@@ -10,6 +10,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.maks.courseproject.data.network.ApiService
 import com.maks.courseproject.data.pagging.characters.CharactersPagingSource
+import com.maks.courseproject.data.repositories.DataBaseRepositoryImpl
 import com.maks.courseproject.data.repositories.RemoteRepositoryImpl
 import com.maks.courseproject.domain.model.characters.CharacterDTO
 import com.maks.courseproject.utils.BASE_PAGE
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 class CharactersViewModel @Inject constructor(
     private val apiService: ApiService,
-    private val charactersRepository: RemoteRepositoryImpl
+    private val charactersRepository: RemoteRepositoryImpl,
+    private val db: DataBaseRepositoryImpl
 ) : ViewModel() {
     val charactersLiveData: LiveData<CharacterDTO> = MutableLiveData()
     val isLoading: LiveData<Boolean> = MutableLiveData()
@@ -34,15 +36,18 @@ class CharactersViewModel @Inject constructor(
 
     fun requestCharacter() {
         viewModelScope.launch {
-            isLoading.mutable().postValue(true)
-            charactersRepository.getCharacters().let { response ->
-                if (response.isSuccessful) {
-                    isLoading.mutable().postValue(false)
-                    charactersLiveData.mutable().postValue(response.body())
-                } else {
-                    isLoading.mutable().postValue(false)
-                    Log.d("@@@", "Error: ${response.errorBody()}")
+            try {
+                isLoading.mutable().postValue(true)
+                charactersRepository.getCharacters().let { response ->
+                    if (response.isSuccessful) {
+                        isLoading.mutable().postValue(false)
+                        charactersLiveData.mutable().postValue(response.body())
+                    } else {
+                        isLoading.mutable().postValue(false)
+                        Log.d("@@@", "Error: ${response.errorBody()}")
+                    }
                 }
+            } catch (e: Exception) {
             }
         }
     }

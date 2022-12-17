@@ -54,7 +54,9 @@ class DetailsCharactersFragment : Fragment(), AppBarLayout.OnOffsetChangedListen
         val id = arguments.let {
             it?.getInt(CHARACTER_ID)
         }
+        lifecycleScope.launch(){
         viewModel.requestCharacter(id ?: throw RuntimeException("id == null"))
+        }
     }
 
     private fun swipeToRefresh() {

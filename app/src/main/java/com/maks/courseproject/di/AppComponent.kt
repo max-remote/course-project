@@ -9,10 +9,12 @@ import com.maks.courseproject.ui.fragments.location_details.DetailsLocationViewM
 import dagger.Component
 import javax.inject.Singleton
 
+
 @Singleton
-@Component(modules = [NetworkModule::class, RemoteRepositoriesModule::class,DatabaseModule::class])
+@Component(modules = [NetworkModule::class, RemoteRepositoriesModule::class,DatabaseModule::class, AppModule::class])
 
 interface AppComponent {
+
     fun charactersViewModelsFactory(): CharactersViewModelFactory
 
     fun locationViewModelFactory(): LocationsViewModelFactory
