@@ -6,7 +6,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-object NetworkModule {
+class NetworkModule {
     @Singleton
     @Provides
     fun provideApiService(): ApiService = ApiService.create()
