@@ -33,16 +33,21 @@ class CharactersViewModel @Inject constructor(
     }.flow.cachedIn(viewModelScope)
 
     fun requestCharacter() {
-        viewModelScope.launch {
-            isLoading.mutable().postValue(true)
-            charactersRepository.getCharacters().let { response ->
-                if (response.isSuccessful) {
-                    isLoading.mutable().postValue(false)
-                    charactersLiveData.mutable().postValue(response.body())
-                } else {
-                    isLoading.mutable().postValue(false)
-                    Log.d("@@@", "Error: ${response.errorBody()}")
+            viewModelScope.launch {
+                try {
+                    isLoading.mutable().postValue(true)
+                charactersRepository.getCharacters().let { response ->
+                    if (response.isSuccessful) {
+                        charactersLiveData.mutable().postValue(response.body())
+                        isLoading.mutable().postValue(false)
+                    } else {
+                        isLoading.mutable().postValue(false)
+                        Log.d("@@@", "Error: ${response.errorBody()}")
+                    }
                 }
+            }catch (e:Exception){
+                    isLoading.mutable().postValue(false)
+                    Log.d("@@@", "Error: ${e.cause}")
             }
         }
     }
