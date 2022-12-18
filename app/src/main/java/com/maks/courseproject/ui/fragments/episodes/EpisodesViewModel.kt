@@ -33,15 +33,20 @@ class EpisodesViewModel @Inject constructor(
     }.flow.cachedIn(viewModelScope)
 
     fun requestEpisodes() = viewModelScope.launch {
-        isLoading.mutable().postValue(true)
-        remoteRepository.getEpisodes().let { response ->
-            if (response.isSuccessful) {
-                episodesLiveData.mutable().postValue(response.body())
-                isLoading.mutable().postValue(false)
-            } else {
-                Log.d("@@@", "Error: ${response.errorBody()}")
-                isLoading.mutable().postValue(false)
+        try {
+            isLoading.mutable().postValue(true)
+            remoteRepository.getEpisodes().let { response ->
+                if (response.isSuccessful) {
+                    episodesLiveData.mutable().postValue(response.body())
+                    isLoading.mutable().postValue(false)
+                } else {
+                    Log.d("@@@", "Error: ${response.errorBody()}")
+                    isLoading.mutable().postValue(false)
+                }
             }
+        } catch (e: Exception) {
+            isLoading.mutable().postValue(false)
+            Log.d("@@@", "Error: ${e.cause}")
         }
     }
 

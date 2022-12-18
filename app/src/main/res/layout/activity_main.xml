@@ -5,6 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/network_message_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white_dark"
+        android:gravity="center"
+        android:text="@string/no_internet_connection_message"
+        android:textColor="@color/purple_200"
+        android:visibility="gone"
+        app:drawableLeftCompat="@drawable/ic_no_internet"
+        android:drawablePadding="@dimen/small_padding"
+        app:layout_constraintBottom_toTopOf="@id/container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visability="visible" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"
         android:layout_width="@dimen/fill_parent"
@@ -12,17 +29,17 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_app_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/network_message_frame"
         tools:context=".ui.activity.MainActivity" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/light_gray"
         app:itemIconSize="@dimen/icon_size_for_menu"
         app:itemTextAppearanceActive="@color/black"
         app:itemTextColor="@color/purple_200"
-        android:background="@color/light_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
