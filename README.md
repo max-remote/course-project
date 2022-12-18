@@ -114,7 +114,7 @@
 * Пагинация с помощью Paging 3.
 * Адаптеры с Diffutil и ListAdapter.
 * Многопоточность через Coroutine
-
+* ConnectivityManager как LiveData для отслеживания network state.
 ---
 
 
