@@ -40,4 +40,5 @@
     <string name="episode_information_header_text">Episode Information:</string>
     <string name="location_information_header_text">Location Information:</string>
     <string name="image_for_details_episode_description">image_for_details_episode_description</string>
+    <string name="no_internet_connection_message">No Internet Connection</string>
 </resources>

@@ -22,32 +22,41 @@ class DetailsEpisodesViewModel @Inject constructor(
 
     fun requestEpisode(characterId: Int) {
         viewModelScope.launch {
-            isLoading.mutable().postValue(true)
-            charactersRepository.getOneEpisode(characterId).let { response ->
-                if (response.isSuccessful) {
-                    isLoading.mutable().postValue(false)
-                    episodesLiveData.mutable().postValue(response.body())
-                } else {
-                    isLoading.mutable().postValue(false)
-                    Log.d("@@@", "Error: ${response.errorBody()}")
+            try {
+                isLoading.mutable().postValue(true)
+                charactersRepository.getOneEpisode(characterId).let { response ->
+                    if (response.isSuccessful) {
+                        isLoading.mutable().postValue(false)
+                        episodesLiveData.mutable().postValue(response.body())
+                    } else {
+                        isLoading.mutable().postValue(false)
+                        Log.d("@@@", "Error: ${response.errorBody()}")
+                    }
                 }
+            } catch (e: Exception) {
+                isLoading.mutable().postValue(false)
+                Log.d("@@@", "Error: ${e.cause}")
             }
         }
     }
 
     fun requestResidents(urls: List<String>) {
         viewModelScope.launch {
-            isLoading.mutable().postValue(true)
-
-            val preparedIds: String = urls.joinToString(",") { it.substringAfterLast('/') }
-            charactersRepository.getListOfCharacters(preparedIds).let { response ->
-                if (!response.isSuccessful) {
-                    isLoading.mutable().postValue(false)
-                    Log.d("@@@", "Error")
-                } else {
-                    isLoading.mutable().postValue(false)
-                    charactersLiveData.mutable().postValue(response.body())
+            try {
+                isLoading.mutable().postValue(true)
+                val preparedIds: String = urls.joinToString(",") { it.substringAfterLast('/') }
+                charactersRepository.getListOfCharacters(preparedIds).let { response ->
+                    if (!response.isSuccessful) {
+                        isLoading.mutable().postValue(false)
+                        Log.d("@@@", "Error")
+                    } else {
+                        isLoading.mutable().postValue(false)
+                        charactersLiveData.mutable().postValue(response.body())
+                    }
                 }
+            } catch (e: Exception) {
+                isLoading.mutable().postValue(false)
+                Log.d("@@@", "Error: ${e.cause}")
             }
         }
     }
