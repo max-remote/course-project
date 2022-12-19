@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,6 +13,7 @@ import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentEpisodesBinding
 import com.maks.courseproject.getAppComponent
 import com.maks.courseproject.ui.fragments.episodes_details.DetailsEpisodesFragment
+import com.maks.courseproject.utils.DEFAULT_QUERY
 import kotlinx.coroutines.launch
 
 class EpisodesFragment : Fragment() {
@@ -44,6 +46,21 @@ class EpisodesFragment : Fragment() {
         swipeToRefresh()
         onItemClicked()
         onButtonSearchClicked()
+        searchEpisode()
+    }
+
+    private fun searchEpisode() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                viewModel.requestEpisodes(newText)
+                binding.episodesRecyclerView.scrollToPosition(0)
+                return true
+            }
+        })
     }
 
     private fun onItemClicked() {
@@ -70,7 +87,8 @@ class EpisodesFragment : Fragment() {
 
     private fun swipeToRefresh() {
         binding.swipeRefresh.setOnRefreshListener {
-            viewModel.requestEpisodes()
+            viewModel.requestEpisodes(DEFAULT_QUERY)
+            binding.searchView.visibility = View.GONE
         }
     }
 
@@ -85,8 +103,8 @@ class EpisodesFragment : Fragment() {
         viewModel.episodesLiveData.observe(viewLifecycleOwner) { response ->
             if (response != null) {
                 lifecycleScope.launch {
-                    viewModel.listData.collect() {
-                        episodesAdapter.submitData(it)
+                    viewModel.listData.observe(viewLifecycleOwner) {
+                        episodesAdapter.submitData(viewLifecycleOwner.lifecycle, it)
                     }
                 }
             }
