@@ -19,7 +19,8 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("character/")
     suspend fun getCharacters(
-        @Query("page") page : Int = BASE_PAGE //TODO убрать этот гвоздь и ниже тк скорее всего не будет работать поиск из-за этого
+        @Query("page") page : Int = BASE_PAGE,
+        @Query("name") name : String
     ): Response<CharacterDTO>
 
     @GET("character/{id}")
@@ -34,7 +35,8 @@ interface ApiService {
 
     @GET("location/")
     suspend fun getLocations(
-        @Query("page") page: Int = BASE_PAGE
+        @Query("page") page: Int = BASE_PAGE,
+        @Query("name") name : String
     ): Response<LocationDTO>
 
     @GET("location/{id}")
@@ -44,7 +46,8 @@ interface ApiService {
 
     @GET("episode/")
     suspend fun getEpisodes(
-        @Query("page") page: Int = BASE_PAGE
+        @Query("page") page: Int = BASE_PAGE,
+        @Query("name") name : String
     ): Response<EpisodesDTO>
 
     @GET("episode/{id}")

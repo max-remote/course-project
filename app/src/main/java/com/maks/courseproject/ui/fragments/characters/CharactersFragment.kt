@@ -13,6 +13,7 @@ import com.maks.courseproject.R
 import com.maks.courseproject.databinding.FragmentCharactersBinding
 import com.maks.courseproject.getAppComponent
 import com.maks.courseproject.ui.fragments.characters_details.DetailsCharactersFragment
+import com.maks.courseproject.utils.DEFAULT_QUERY
 import kotlinx.coroutines.launch
 
 class CharactersFragment : Fragment() {
@@ -45,17 +46,20 @@ class CharactersFragment : Fragment() {
         swipeToRefresh()
         onButtonSearchClicked()
         onItemClicked()
+        searchCharacter()
+    }
 
-                //TODO ПОИСК ПО СПИСКУ РЕАЛИЗОВАТЬ
+    private fun searchCharacter() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+                viewModel.requestCharacter(newText)
+                binding.charactersRecyclerView.scrollToPosition(0)
                 return true
             }
-
         })
     }
 
@@ -83,7 +87,8 @@ class CharactersFragment : Fragment() {
 
     private fun swipeToRefresh() {
         binding.swipeRefresh.setOnRefreshListener {
-            viewModel.requestCharacter()
+            viewModel.requestCharacter(DEFAULT_QUERY)
+            binding.searchView.visibility = View.GONE
         }
     }
 
@@ -91,8 +96,8 @@ class CharactersFragment : Fragment() {
         viewModel.charactersLiveData.observe(viewLifecycleOwner) { response ->
             if (response != null) {
                 lifecycleScope.launch {
-                    viewModel.listData.collect() {
-                        charactersAdapter.submitData(it)
+                    viewModel.listData.observe(viewLifecycleOwner) {
+                        charactersAdapter.submitData(viewLifecycleOwner.lifecycle, it)
                     }
                 }
             }
