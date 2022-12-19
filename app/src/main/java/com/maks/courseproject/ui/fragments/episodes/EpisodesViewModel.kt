@@ -1,42 +1,35 @@
 package com.maks.courseproject.ui.fragments.episodes
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
+import androidx.lifecycle.*
 import androidx.paging.cachedIn
-import com.maks.courseproject.data.network.ApiService
-import com.maks.courseproject.data.pagging.episodes.EpisodesPagingSource
 import com.maks.courseproject.data.repositories.RemoteRepositoryImpl
 import com.maks.courseproject.domain.model.episodes.EpisodesDTO
-import com.maks.courseproject.utils.BASE_PAGE
+import com.maks.courseproject.utils.DEFAULT_QUERY
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class EpisodesViewModel @Inject constructor(
-    private val apiService: ApiService,
     private val remoteRepository: RemoteRepositoryImpl
 ) : ViewModel() {
     val episodesLiveData: LiveData<EpisodesDTO> = MutableLiveData()
     val isLoading: LiveData<Boolean> = MutableLiveData()
+    private val currentQuery = MutableLiveData(DEFAULT_QUERY)
 
     init {
-        requestEpisodes()
+        requestEpisodes(DEFAULT_QUERY)
     }
 
-    val listData = Pager(PagingConfig(pageSize = BASE_PAGE)) {
-        EpisodesPagingSource(apiService = apiService)
+    val listData = currentQuery.switchMap { queryString ->
+        remoteRepository.getSearchResultEpisode(queryString).cachedIn(viewModelScope)
+    }
 
-    }.flow.cachedIn(viewModelScope)
-
-    fun requestEpisodes() = viewModelScope.launch {
+    fun requestEpisodes(name: String) = viewModelScope.launch {
         try {
             isLoading.mutable().postValue(true)
-            remoteRepository.getEpisodes().let { response ->
+            remoteRepository.getEpisodes(name).let { response ->
                 if (response.isSuccessful) {
+                    currentQuery.value = name
                     episodesLiveData.mutable().postValue(response.body())
                     isLoading.mutable().postValue(false)
                 } else {
