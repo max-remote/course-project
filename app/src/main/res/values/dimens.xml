@@ -33,4 +33,12 @@
     <dimen name="vector_max_size">200dp</dimen>
     <dimen name="icon_size_for_menu">30dp</dimen>
     <dimen name="info_header_text_size">20sp</dimen>
+    <dimen name="height_of_bottom_sheet">680dp</dimen>
+    <dimen name="behavior_peek_height_size">110dp</dimen>
+    <dimen name="bottom_sheet_line_width">25dp</dimen>
+    <dimen name="bottom_sheet_line_height">4dp</dimen>
+    <dimen name="bottom_sheet_line_margin_top">5dp</dimen>
+    <dimen name="horizontal_scroll_margin">20dp</dimen>
+    <dimen name="chip_spacing_horizontal">10dp</dimen>
+    <dimen name="header_small">16sp</dimen>
 </resources>
