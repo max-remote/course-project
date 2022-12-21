@@ -28,7 +28,6 @@ interface RemoteRepository {
 
     suspend fun getCharacterEpisodes(urls: String): Response<List<EpisodesResultDTO>>
     suspend fun getListOfCharacters(urls: String): Response<List<CharactersResultDTO>>
-
 }
 
 class RemoteRepositoryImpl @Inject constructor(private val apiService: ApiService) :

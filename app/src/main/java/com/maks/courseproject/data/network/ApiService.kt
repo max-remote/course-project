@@ -6,10 +6,7 @@ import com.maks.courseproject.domain.model.episodes.EpisodesDTO
 import com.maks.courseproject.domain.model.episodes.EpisodesResultDTO
 import com.maks.courseproject.domain.model.locations.LocationDTO
 import com.maks.courseproject.domain.model.locations.LocationsResultDTO
-import com.maks.courseproject.utils.BASE_PAGE
-import com.maks.courseproject.utils.BASE_URL
-import com.maks.courseproject.utils.addJsonConverter
-import com.maks.courseproject.utils.setClient
+import com.maks.courseproject.utils.*
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
@@ -20,7 +17,16 @@ interface ApiService {
     @GET("character/")
     suspend fun getCharacters(
         @Query("page") page : Int = BASE_PAGE,
-        @Query("name") name : String
+        @Query("name") name : String = DEFAULT_STRING_QUERY,
+    ): Response<CharacterDTO>
+
+    @GET("character/")
+    suspend fun getFilterCharacters(
+        @Query("page") page : Int = BASE_PAGE,
+        @Query("status") status : String = DEFAULT_STRING_QUERY,
+        @Query("species") species : String = DEFAULT_STRING_QUERY,
+        @Query("type") type : String = DEFAULT_STRING_QUERY,
+        @Query("gender") gender : String = DEFAULT_STRING_QUERY
     ): Response<CharacterDTO>
 
     @GET("character/{id}")
@@ -36,7 +42,7 @@ interface ApiService {
     @GET("location/")
     suspend fun getLocations(
         @Query("page") page: Int = BASE_PAGE,
-        @Query("name") name : String
+        @Query("name") name : String = DEFAULT_STRING_QUERY
     ): Response<LocationDTO>
 
     @GET("location/{id}")
@@ -47,7 +53,7 @@ interface ApiService {
     @GET("episode/")
     suspend fun getEpisodes(
         @Query("page") page: Int = BASE_PAGE,
-        @Query("name") name : String
+        @Query("name") name : String = DEFAULT_STRING_QUERY
     ): Response<EpisodesDTO>
 
     @GET("episode/{id}")

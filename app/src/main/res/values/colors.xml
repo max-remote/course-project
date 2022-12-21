@@ -14,4 +14,5 @@
     <color name="dark_green">#059400</color>
     <color name="extra_dark_green">#035400</color>
     <color name="progress_color">#BD88FF</color>
+    <color name="sheet_holder_color">#7976FF03</color>
 </resources>

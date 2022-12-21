@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:context=".ui.fragments.episodes_details.DetailsEpisodesFragment">
+    tools:context=".ui.fragments.episodes_screens.episodes_details.DetailsEpisodesFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator"
