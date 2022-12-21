@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:visibility="visible"
+    app:behavior_peekHeight="@dimen/fill_parent"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <View
+        android:id="@+id/bottom_sheet_line"
+        android:layout_width="@dimen/bottom_sheet_line_width"
+        android:layout_height="@dimen/bottom_sheet_line_height"
+        android:layout_margin="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/bottom_sheet_line_margin_top"
+        android:background="@color/sheet_holder_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_name_filter_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_margin"
+        android:padding="@dimen/small_padding"
+        android:text="@string/episode_filter_header_text"
+        android:textColor="@color/extra_green"
+        android:textSize="@dimen/header_text_view_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottom_sheet_line" />
+
+
+    <ImageButton
+        android:id="@+id/btn_hide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/search_button_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_back_sheet"
+        app:layout_constraintBottom_toTopOf="@+id/text_view_header_species"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.72" />
+
+    <TextView
+        android:id="@+id/text_view_header_species"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_margin"
+        android:padding="@dimen/small_padding"
+        android:text="@string/episode_filters_header_species_text"
+        android:textColor="@color/extra_green"
+        android:textSize="@dimen/header_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_name_filter_screen" />
+
+    <HorizontalScrollView
+        android:id="@+id/scrolled_chip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_scroll_margin"
+        android:layout_marginEnd="@dimen/horizontal_scroll_margin"
+        app:layout_constraintStart_toStartOf="@+id/text_view_header_species"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_header_species">
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipSpacingHorizontal="@dimen/chip_spacing_horizontal"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s01e01"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s01e01"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s01e02"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s01e02"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s01e03"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s01e03"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s01e04"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s01e04"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s01e05"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s01e05"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s01e06"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s01e06"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s01e07"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s01e07"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s01e08"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s01e08"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s01e09"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s01e09"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s01e10"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s01e10"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s01e11"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s01e11"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s02e01"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s02e01"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s02e02"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s02e02"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s02e03"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s02e03"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s02e04"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s02e04"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s02e05"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s02e05"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s02e06"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s02e06"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s02e07"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s02e07"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s02e08"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s02e08"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s02e09"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s02e09"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s02e10"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s02e10"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s03e01"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s03e01"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s03e02"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s03e02"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s03e03"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s03e03"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s03e04"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s03e04"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s03e05"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s03e05"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s03e06"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s03e06"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s03e07"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s03e07"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s03e08"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s03e08"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s03e09"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s03e09"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s03e10"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s03e10"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s04e01"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s04e01"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s04e02"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s04e02"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s04e03"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s04e03"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s04e04"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s04e04"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s04e05"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s04e05"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s04e06"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s04e06"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s04e07"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s04e07"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s04e08"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s04e08"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s04e09"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s04e09"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s04e10"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s04e10"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s05e01"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s05e01"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s05e02"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s05e02"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s05e03"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s05e03"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s05e04"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s05e04"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s05e05"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s05e05"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s05e06"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s05e06"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s05e07"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s05e07"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s05e08"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s05e08"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s05e09"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s05e09"
+                app:chipBackgroundColor="@color/white_dark" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_episode_s05e10"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/s05e10"
+                app:chipBackgroundColor="@color/white_dark" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/btn_apply"
+        android:layout_width="@dimen/fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/apply_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrolled_chip" />
+</androidx.constraintlayout.widget.ConstraintLayout>

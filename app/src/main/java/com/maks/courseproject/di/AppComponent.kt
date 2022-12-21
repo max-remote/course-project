@@ -1,11 +1,11 @@
 package com.maks.courseproject.di
 
-import com.maks.courseproject.ui.fragments.characters.CharactersViewModelFactory
-import com.maks.courseproject.ui.fragments.characters_details.DetailsCharactersViewModelFactory
-import com.maks.courseproject.ui.fragments.episodes.EpisodesViewModelFactory
-import com.maks.courseproject.ui.fragments.episodes_details.DetailsEpisodesViewModelFactory
-import com.maks.courseproject.ui.fragments.location.LocationsViewModelFactory
-import com.maks.courseproject.ui.fragments.location_details.DetailsLocationViewModelFactory
+import com.maks.courseproject.ui.fragments.characters_screens.characters.CharactersViewModelFactory
+import com.maks.courseproject.ui.fragments.characters_screens.characters_details.DetailsCharactersViewModelFactory
+import com.maks.courseproject.ui.fragments.episodes_screens.episodes.EpisodesViewModelFactory
+import com.maks.courseproject.ui.fragments.episodes_screens.episodes_details.DetailsEpisodesViewModelFactory
+import com.maks.courseproject.ui.fragments.location_screens.location.LocationsViewModelFactory
+import com.maks.courseproject.ui.fragments.location_screens.location_details.DetailsLocationViewModelFactory
 import dagger.Component
 import javax.inject.Singleton
 

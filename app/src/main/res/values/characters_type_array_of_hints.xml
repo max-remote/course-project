@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="characters_hints">
+        <item> superhuman</item>
+        <item> parasite</item>
+        <item> human</item>
+        <item> person</item>
+        <item> cromulon</item>
+        <item> arm</item>
+        <item> bepisian</item>
+        <item> hivemind</item>
+        <item> mytholog</item>
+        <item> dog</item>
+        <item> korblock</item>
+        <item> boobloosian</item>
+        <item> gromflomite</item>
+        <item> centaur</item>
+        <item> organic gun</item>
+        <item> microverse</item>
+        <item> vampire</item>
+        <item> bulb</item>
+        <item> animal</item>
+        <item> hybrid</item>
+        <item> zigerion</item>
+        <item> giant</item>
+        <item> cone</item>
+        <item> demon</item>
+        <item> shapeshifter</item>
+        <item> clone</item>
+        <item> robot</item>
+        <item> interdimensional</item>
+        <item> flansian</item>
+        <item> goddess</item>
+        <item> reproduction</item>
+        <item> hole</item>
+        <item> alphabetrian</item>
+        <item> hologram</item>
+        <item> narnian</item>
+        <item> starfish</item>
+        <item> cat</item>
+        <item> gazorpian</item>
+        <item> time</item>
+        <item> krootabulan</item>
+        <item> plutonian</item>
+        <item> jellybean</item>
+        <item> alien</item>
+        <item> miniverse inhabitant</item>
+        <item> cyborg</item>
+        <item> tinymouth</item>
+        <item> monster</item>
+        <item> conjoined</item>
+        <item> colony</item>
+        <item> reptilian</item>
+        <item> devil</item>
+        <item> numbericon</item>
+        <item> pickle</item>
+        <item> bread</item>
+        <item> gargantuan</item>
+        <item> rat</item>
+        <item> scrotian</item>
+        <item> shimshamian</item>
+        <item> omniscient</item>
+        <item> slug</item>
+        <item> stair</item>
+        <item> leprechaun</item>
+        <item> morty</item>
+        <item> rick</item>
+        <item> traflorkian</item>
+        <item> teenyverse</item>
+        <item> tuskfish</item>
+        <item> chair</item>
+        <item> drumbloxian</item>
+        <item> floop</item>
+        <item> game</item>
+        <item> greebybobe</item>
+        <item> bear</item>
+        <item> mexican</item>
+        <item> amazons</item>
+        <item> mannie</item>
+        <item> necrophiliac</item>
+        <item> wasp</item>
+        <item> caterpillar</item>
+        <item> toy</item>
+        <item> meeseeks</item>
+        <item> monogatron</item>
+        <item> fly</item>
+        <item> lizard</item>
+        <item> god</item>
+        <item> dummy</item>
+        <item> gramuflackian</item>
+        <item> dragon</item>
+        <item> snake</item>
+        <item> puppet</item>
+        <item> glorzo</item>
+        <item> planet</item>
+        <item> zeus</item>
+        <item> aquaman</item>
+        <item> squid</item>
+        <item> decoy</item>
+        <item> whenwolf</item>
+        <item> summon</item>
+        <item> morglutzian</item>
+        <item> weasel</item>
+        <item> sperm monster</item>
+        <item> chud</item>
+        <item> incest baby</item>
+        <item> changeformer</item>
+        <item> intelligence</item>
+        <item> guinea pig</item>
+        <item> turkey</item>
+        <item> anime</item>
+        <item> memory</item>
+        <item> cookie</item>
+        <item> crow</item>
+        <item> bug</item>
+        <item> slartivartian</item>
+        <item> ferkusian</item>
+        <item> mascot</item>
+        <item> scarecrow</item>
+        <item> tiger</item>
+        <item> crow horse</item>
+    </string-array>
+
+</resources>
