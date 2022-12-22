@@ -14,7 +14,7 @@ import com.maks.courseproject.databinding.FragmentLocationBinding
 import com.maks.courseproject.getAppComponent
 import com.maks.courseproject.ui.fragments.location_screens.location_details.DetailsLocationFragment
 import com.maks.courseproject.ui.fragments.location_screens.location_filter.LocationsFilterFragment
-import com.maks.courseproject.utils.DEFAULT_STRING_QUERY
+import com.maks.courseproject.data.network.utils.DEFAULT_STRING_QUERY
 import kotlinx.coroutines.launch
 
 class LocationFragment : Fragment() {
@@ -49,7 +49,6 @@ class LocationFragment : Fragment() {
         onButtonSearchClicked()
         onButtonFilterClicked()
     }
-
 
     private fun onItemClicked() {
         locationAdapter.onItemClickListener = { location ->

@@ -19,7 +19,6 @@ class DetailsEpisodesViewModel @Inject constructor(
     val episodesLiveData: LiveData<EpisodesResultDTO> = MutableLiveData()
     val charactersLiveData: LiveData<List<CharactersResultDTO>> = MutableLiveData()
 
-
     fun requestEpisode(characterId: Int) {
         viewModelScope.launch {
             try {
@@ -60,7 +59,6 @@ class DetailsEpisodesViewModel @Inject constructor(
             }
         }
     }
-
 
     private fun <T> LiveData<T>.mutable(): MutableLiveData<T> {
         return this as? MutableLiveData<T>

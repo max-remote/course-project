@@ -5,7 +5,7 @@ import androidx.lifecycle.*
 import androidx.paging.cachedIn
 import com.maks.courseproject.data.repositories.RemoteRepositoryImpl
 import com.maks.courseproject.domain.model.episodes.EpisodesDTO
-import com.maks.courseproject.utils.DEFAULT_STRING_QUERY
+import com.maks.courseproject.data.network.utils.DEFAULT_STRING_QUERY
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

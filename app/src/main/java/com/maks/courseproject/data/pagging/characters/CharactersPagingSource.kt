@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.maks.courseproject.data.network.ApiService
 import com.maks.courseproject.domain.model.characters.CharactersResultDTO
-import com.maks.courseproject.utils.BASE_PAGE
+import com.maks.courseproject.data.network.utils.BASE_PAGE
 import javax.inject.Inject
 
 class CharactersPagingSource @Inject constructor(
@@ -35,5 +35,4 @@ class CharactersPagingSource @Inject constructor(
             LoadResult.Error(e)
         }
     }
-
 }

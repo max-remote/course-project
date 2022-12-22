@@ -14,7 +14,7 @@ import com.maks.courseproject.databinding.FragmentEpisodesBinding
 import com.maks.courseproject.getAppComponent
 import com.maks.courseproject.ui.fragments.episodes_screens.episodes_details.DetailsEpisodesFragment
 import com.maks.courseproject.ui.fragments.episodes_screens.episodes_filter.EpisodesFilterFragment
-import com.maks.courseproject.utils.DEFAULT_STRING_QUERY
+import com.maks.courseproject.data.network.utils.DEFAULT_STRING_QUERY
 import kotlinx.coroutines.launch
 
 class EpisodesFragment : Fragment() {

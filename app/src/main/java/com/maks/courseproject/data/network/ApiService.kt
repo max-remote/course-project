@@ -1,5 +1,6 @@
 package com.maks.courseproject.data.network
 
+import com.maks.courseproject.data.network.utils.*
 import com.maks.courseproject.domain.model.characters.CharacterDTO
 import com.maks.courseproject.domain.model.characters.CharactersResultDTO
 import com.maks.courseproject.domain.model.episodes.EpisodesDTO
@@ -18,15 +19,6 @@ interface ApiService {
     suspend fun getCharacters(
         @Query("page") page : Int = BASE_PAGE,
         @Query("name") name : String = DEFAULT_STRING_QUERY,
-    ): Response<CharacterDTO>
-
-    @GET("character/")
-    suspend fun getFilterCharacters(
-        @Query("page") page : Int = BASE_PAGE,
-        @Query("status") status : String = DEFAULT_STRING_QUERY,
-        @Query("species") species : String = DEFAULT_STRING_QUERY,
-        @Query("type") type : String = DEFAULT_STRING_QUERY,
-        @Query("gender") gender : String = DEFAULT_STRING_QUERY
     ): Response<CharacterDTO>
 
     @GET("character/{id}")

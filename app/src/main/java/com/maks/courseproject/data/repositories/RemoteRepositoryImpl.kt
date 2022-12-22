@@ -13,7 +13,7 @@ import com.maks.courseproject.domain.model.episodes.EpisodesDTO
 import com.maks.courseproject.domain.model.episodes.EpisodesResultDTO
 import com.maks.courseproject.domain.model.locations.LocationDTO
 import com.maks.courseproject.domain.model.locations.LocationsResultDTO
-import com.maks.courseproject.utils.BASE_PAGE
+import com.maks.courseproject.data.network.utils.BASE_PAGE
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -59,25 +59,19 @@ class RemoteRepositoryImpl @Inject constructor(private val apiService: ApiServic
 
     fun getSearchResultCharacter(name: String) =
         Pager(
-            config = PagingConfig(
-                pageSize = BASE_PAGE
-            ),
+            config = PagingConfig(pageSize = BASE_PAGE),
             pagingSourceFactory = { CharactersPagingSource(apiService = apiService, query = name) }
         ).liveData
 
     fun getSearchResultEpisode(name: String) =
         Pager(
-            config = PagingConfig(
-                pageSize = BASE_PAGE
-            ),
+            config = PagingConfig(pageSize = BASE_PAGE),
             pagingSourceFactory = { EpisodesPagingSource(apiService = apiService, query = name) }
         ).liveData
 
     fun getSearchResultLocation(name: String) =
         Pager(
-            config = PagingConfig(
-                pageSize = BASE_PAGE
-            ),
+            config = PagingConfig(pageSize = BASE_PAGE),
             pagingSourceFactory = { LocationsPagingSource(apiService = apiService, query = name) }
         ).liveData
 }

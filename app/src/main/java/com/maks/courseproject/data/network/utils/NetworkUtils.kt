@@ -1,6 +1,6 @@
-package com.maks.courseproject.utils
+package com.maks.courseproject.data.network.utils
 
-import com.maks.courseproject.BuildConfig
+import androidx.viewbinding.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

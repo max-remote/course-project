@@ -14,7 +14,7 @@ import com.maks.courseproject.databinding.FragmentCharactersBinding
 import com.maks.courseproject.getAppComponent
 import com.maks.courseproject.ui.fragments.characters_screens.characters_details.DetailsCharactersFragment
 import com.maks.courseproject.ui.fragments.characters_screens.characters_filter.CharacterFilterFragment
-import com.maks.courseproject.utils.DEFAULT_STRING_QUERY
+import com.maks.courseproject.data.network.utils.DEFAULT_STRING_QUERY
 import kotlinx.coroutines.launch
 
 class CharactersFragment : Fragment() {
